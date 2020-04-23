@@ -687,6 +687,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function triggerModal() {
           this.openModal.emit(true);
         }
+      }, {
+        key: "checkMyAccount",
+        value: function checkMyAccount() {
+          var _this = this;
+
+          this.auth.authStateTrack().then(function (response) {
+            if (response) {
+              _this.toggleOverlay();
+            } else {
+              _this.triggerModal();
+
+              _this.toggleOverlay();
+            }
+          });
+        }
       }]);
 
       return NavbarComponent;
@@ -783,7 +798,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "a", 15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NavbarComponent_Template_a_click_18_listener() {
-            return ctx.toggleOverlay();
+            return ctx.checkMyAccount();
           });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "i", 17);
@@ -2063,20 +2078,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(LoginComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this = this;
+          var _this2 = this;
 
           this.auth.authStateTrack().then(function (response) {
-            _this.isLoggedIn = response;
+            _this2.isLoggedIn = response;
           }, function (errRes) {
-            _this.toastrService.error(errRes.message, 'Error.');
+            _this2.toastrService.error(errRes.message, 'Error.');
           })["catch"](function (errorRes) {
-            _this.toastrService.error(errorRes.message, 'Error.');
+            _this2.toastrService.error(errorRes.message, 'Error.');
           });
           this.initLoginForm();
           this.initRegisterForm();
           this.router.events.subscribe(function (eventChange) {
             if (eventChange instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationStart"]) {
-              _this.closeModal();
+              _this2.closeModal();
             }
           });
         }
@@ -2093,10 +2108,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onRegisterFormSubmit",
         value: function onRegisterFormSubmit() {
-          var _this2 = this;
+          var _this3 = this;
 
           this.auth.signUp(this.registerForm.value.registerEmail, this.registerForm.value.registerPassword)["catch"](function (error) {
-            _this2.toastrService.error(error.message, 'An error has occurred.');
+            _this3.toastrService.error(error.message, 'An error has occurred.');
           });
           this.toastrService.success('You have created an account!', 'Success!');
           this.closeModal();
@@ -2116,10 +2131,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onLoginFormSubmit",
         value: function onLoginFormSubmit() {
-          var _this3 = this;
+          var _this4 = this;
 
           this.auth.signIn(this.loginForm.value.email, this.loginForm.value.password)["catch"](function (error) {
-            _this3.toastrService.error(error.message, 'An error has occurred.');
+            _this4.toastrService.error(error.message, 'An error has occurred.');
           });
           this.toastrService.success('Logged in!', 'Success!');
           this.closeModal();
