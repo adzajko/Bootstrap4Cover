@@ -685,8 +685,8 @@ class ContactComponent {
         });
     }
     onSubmitContactForm() {
+        this.contactForm.reset();
         this.toastrService.info('Feature coming soon!');
-        console.log(this.contactForm.value);
     }
 }
 ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"])); };
@@ -1232,6 +1232,7 @@ class MyAccountComponent {
     }
     create() {
         const review = this.inputForm.value;
+        this.inputForm.reset();
         review.timeStamp = new Date();
         this.companies.forEach(c => {
             if (c.name === review.companyName) {
@@ -1244,11 +1245,9 @@ class MyAccountComponent {
                 .postReview(review)
                 .then(response => {
                 this.toastr.success('Review submitted.', 'Success!');
-                this.inputForm.reset();
             })
                 .catch(errorRes => {
                 this.toastr.error(errorRes.message, 'An Error occurred.');
-                this.inputForm.reset();
             });
         });
     }

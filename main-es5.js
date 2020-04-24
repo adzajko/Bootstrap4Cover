@@ -1367,8 +1367,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onSubmitContactForm",
         value: function onSubmitContactForm() {
+          this.contactForm.reset();
           this.toastrService.info('Feature coming soon!');
-          console.log(this.contactForm.value);
         }
       }]);
 
@@ -2472,6 +2472,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this6 = this;
 
           var review = this.inputForm.value;
+          this.inputForm.reset();
           review.timeStamp = new Date();
           this.companies.forEach(function (c) {
             if (c.name === review.companyName) {
@@ -2483,12 +2484,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             _this6.reviewService.postReview(review).then(function (response) {
               _this6.toastr.success('Review submitted.', 'Success!');
-
-              _this6.inputForm.reset();
             })["catch"](function (errorRes) {
               _this6.toastr.error(errorRes.message, 'An Error occurred.');
-
-              _this6.inputForm.reset();
             });
           });
         }
