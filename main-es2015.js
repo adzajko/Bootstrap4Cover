@@ -1593,17 +1593,17 @@ class LoginComponent {
     ngOnInit() {
         this.auth
             .authStateTrack()
-            .then((response) => {
+            .then(response => {
             this.isLoggedIn = response.logged;
-        }, (errRes) => {
+        }, errRes => {
             this.toastrService.error(errRes.message, 'Error.');
         })
-            .catch((errorRes) => {
+            .catch(errorRes => {
             this.toastrService.error(errorRes.message, 'Error.');
         });
         this.initLoginForm();
         this.initRegisterForm();
-        this.router.events.subscribe((eventChange) => {
+        this.router.events.subscribe(eventChange => {
             if (eventChange instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationStart"]) {
                 this.closeModal();
             }
@@ -1612,36 +1612,34 @@ class LoginComponent {
     initRegisterForm() {
         const eMail = '';
         const passWord = '';
-        this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
+        this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            registerEmail: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
+            registerPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
         });
     }
     onRegisterFormSubmit() {
         this.auth
             .signUp(this.registerForm.value.registerEmail, this.registerForm.value.registerPassword)
-            .catch((error) => {
+            .catch(error => {
             this.toastrService.error(error.message, 'An error has occurred.');
         });
         this.closeModal();
     }
     initLoginForm() {
-        const userName = '';
         const eMail = '';
         const passWord = '';
-        this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            registerUserName: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](userName, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
-            registerEmail: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
-            registerPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
+        this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
         });
     }
     onLoginFormSubmit() {
         this.auth
             .signIn(this.loginForm.value.email, this.loginForm.value.password)
-            .then((response) => {
+            .then(response => {
             this.toastrService.success('You have been logged in.', 'Success!');
         })
-            .catch((error) => {
+            .catch(error => {
             this.toastrService.error(error.message, 'An error has occurred.');
         });
         this.closeModal();
@@ -1679,7 +1677,7 @@ LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         args: [{
                 selector: 'app-login',
                 templateUrl: './login.component.html',
-                styleUrls: ['./login.component.scss'],
+                styleUrls: ['./login.component.scss']
             }]
     }], function () { return [{ type: src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }, { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, { logiRegi: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
@@ -2435,7 +2433,7 @@ class AuthService {
         this.router = router;
         this.toastr = toastr;
         this.publishEmail = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
-        this.afAuth.onAuthStateChanged((user) => {
+        this.afAuth.onAuthStateChanged(user => {
             if (user) {
                 console.log('Logged In!');
             }
@@ -2478,15 +2476,13 @@ class AuthService {
     authStateTrack() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let result;
-            yield this.afAuth.onAuthStateChanged((user) => {
+            yield this.afAuth.onAuthStateChanged(user => {
                 if (user) {
                     if (user.emailVerified) {
                         result = { logged: true, verified: true };
                     }
                     else {
                         result = { logged: true, verified: false };
-                        console.log('SHTO TI E FUNNY BUNNY?>!?!?');
-                        this.sendConfirmationEmail();
                     }
                 }
                 else {
@@ -2512,7 +2508,7 @@ AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjec
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AuthService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
         args: [{
-                providedIn: 'root',
+                providedIn: 'root'
             }]
     }], function () { return [{ type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__["AngularFireAuth"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }]; }, null); })();
 

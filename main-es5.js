@@ -3004,9 +3004,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function initRegisterForm() {
           var eMail = '';
           var passWord = '';
-          this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
+          this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            registerEmail: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
+            registerPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
           });
         }
       }, {
@@ -3022,13 +3022,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "initLoginForm",
         value: function initLoginForm() {
-          var userName = '';
           var eMail = '';
           var passWord = '';
-          this.registerForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            registerUserName: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](userName, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required),
-            registerEmail: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
-            registerPassword: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
+          this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](eMail, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].email),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](passWord, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required)
           });
         }
       }, {
@@ -4428,8 +4426,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "authStateTrack",
         value: function authStateTrack() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _this8 = this;
-
             var result;
             return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
@@ -4448,9 +4444,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             logged: true,
                             verified: false
                           };
-                          console.log('SHTO TI E FUNNY BUNNY?>!?!?');
-
-                          _this8.sendConfirmationEmail();
                         }
                       } else {
                         result = {
