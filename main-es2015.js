@@ -430,7 +430,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function AppComponent_app_login_7_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login", 3);
+} if (rf & 2) {
+    const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("isLoggedIn", ctx_r8.passLoggedStateInfo);
 } }
 function AppComponent_app_http_loader_8_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-http-loader");
@@ -447,6 +450,14 @@ class AppComponent {
     ngOnInit() {
         this.subscription = this.sharedService.publishLoginModalState.subscribe(response => {
             this.shouldModalOpen = response;
+        });
+        this.auth.afAuth.user.subscribe(res => {
+            if (res) {
+                this.passLoggedStateInfo = true;
+            }
+            else {
+                this.passLoggedStateInfo = false;
+            }
         });
         this.auth.triggerLoadingScreen
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["startWith"])(null), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["delay"])(0))
@@ -469,7 +480,7 @@ class AppComponent {
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_shared_service__WEBPACK_IMPORTED_MODULE_5__["SharedService"])); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 9, vars: 3, consts: [["outlet", "outlet"], [4, "ngIf"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 9, vars: 3, consts: [["outlet", "outlet"], [3, "isLoggedIn", 4, "ngIf"], [4, "ngIf"], [3, "isLoggedIn"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "header");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-navbar");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -479,8 +490,8 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "footer");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "app-footer");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, AppComponent_app_login_7_Template, 1, 0, "app-login", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, AppComponent_app_http_loader_8_Template, 1, 0, "app-http-loader", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, AppComponent_app_login_7_Template, 1, 1, "app-login", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, AppComponent_app_http_loader_8_Template, 1, 0, "app-http-loader", 2);
     } if (rf & 2) {
         const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
@@ -1816,14 +1827,6 @@ class LoginComponent {
         this.translateService.get('TOASTR').subscribe(response => {
             this.toastrMessages = response;
         });
-        this.afAuth.user.subscribe(response => {
-            if (response) {
-                this.isLoggedIn = true;
-            }
-            else {
-                this.isLoggedIn = false;
-            }
-        });
         this.initLoginForm();
         this.initRegisterForm();
         this.router.events.subscribe(eventChange => {
@@ -1905,7 +1908,7 @@ LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
     } if (rf & 2) {
         var _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.logiRegi = _t.first);
-    } }, decls: 2, vars: 2, consts: [["class", "henlo", 4, "ngIf"], [4, "ngIf"], [1, "henlo"], ["id", "logiRegiContainer", 1, "login-register"], ["logiRegi", ""], [1, "form-container", "register-container"], [3, "formGroup", "ngSubmit"], ["type", "email", "formControlName", "registerEmail", "required", "", 3, "placeholder"], ["formControlName", "registerPassword", "type", "password", "required", "", "id", "passwordInput", 3, "placeholder"], [1, "btn", "btn-dark", 3, "disabled"], [1, "form-container", "login-container"], ["type", "email", "formControlName", "email", "required", "", 3, "placeholder"], ["type", "password", "formControlName", "password", "required", "", 3, "placeholder"], ["href", "#"], [1, "overlay-container"], [1, "overlay-wrapper"], [1, "overlay-panel", "overlay-login"], ["id", "login", 1, "ghost", 3, "click"], [1, "overlay-panel", "overlay-register"], ["id", "register", 1, "ghost", 3, "click"], [1, "fa", "fa-times", 3, "click"], [1, "card"], [1, "card-header"], [1, "acc-header"], [1, "fa", "fa-times", "white-icon", 3, "click"], [1, "card-body"], [1, "btn", "btn-dark", "mr-2", 3, "routerLink"], [1, "btn", "btn-danger", 3, "click"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { isLoggedIn: "isLoggedIn" }, decls: 2, vars: 2, consts: [["class", "henlo", 4, "ngIf"], [4, "ngIf"], [1, "henlo"], ["id", "logiRegiContainer", 1, "login-register"], ["logiRegi", ""], [1, "form-container", "register-container"], [3, "formGroup", "ngSubmit"], ["type", "email", "formControlName", "registerEmail", "required", "", 3, "placeholder"], ["formControlName", "registerPassword", "type", "password", "required", "", "id", "passwordInput", 3, "placeholder"], [1, "btn", "btn-dark", 3, "disabled"], [1, "form-container", "login-container"], ["type", "email", "formControlName", "email", "required", "", 3, "placeholder"], ["type", "password", "formControlName", "password", "required", "", 3, "placeholder"], ["href", "#"], [1, "overlay-container"], [1, "overlay-wrapper"], [1, "overlay-panel", "overlay-login"], ["id", "login", 1, "ghost", 3, "click"], [1, "overlay-panel", "overlay-register"], ["id", "register", 1, "ghost", 3, "click"], [1, "fa", "fa-times", 3, "click"], [1, "card"], [1, "card-header"], [1, "acc-header"], [1, "fa", "fa-times", "white-icon", 3, "click"], [1, "card-body"], [1, "btn", "btn-dark", "mr-2", 3, "routerLink"], [1, "btn", "btn-danger", 3, "click"]], template: function LoginComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, LoginComponent_main_0_Template, 47, 43, "main", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, LoginComponent_section_1_Template, 14, 11, "section", 1);
     } if (rf & 2) {
@@ -1923,6 +1926,8 @@ LoginComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
     }], function () { return [{ type: src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }, { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }, { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"] }, { type: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateService"] }, { type: src_app_shared_shared_service__WEBPACK_IMPORTED_MODULE_7__["SharedService"] }]; }, { logiRegi: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
             args: ['logiRegi']
+        }], isLoggedIn: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }] }); })();
 
 

@@ -589,7 +589,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function AppComponent_app_login_7_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login", 3);
+      }
+
+      if (rf & 2) {
+        var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("isLoggedIn", ctx_r8.passLoggedStateInfo);
       }
     }
 
@@ -618,6 +624,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.subscription = this.sharedService.publishLoginModalState.subscribe(function (response) {
             _this.shouldModalOpen = response;
+          });
+          this.auth.afAuth.user.subscribe(function (res) {
+            if (res) {
+              _this.passLoggedStateInfo = true;
+            } else {
+              _this.passLoggedStateInfo = false;
+            }
           });
           this.auth.triggerLoadingScreen.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["startWith"])(null), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["delay"])(0)).subscribe(function (response) {
             _this.pendingHttpRequest = response;
@@ -654,7 +667,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-root"]],
       decls: 9,
       vars: 3,
-      consts: [["outlet", "outlet"], [4, "ngIf"]],
+      consts: [["outlet", "outlet"], [3, "isLoggedIn", 4, "ngIf"], [4, "ngIf"], [3, "isLoggedIn"]],
       template: function AppComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "header");
@@ -675,9 +688,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, AppComponent_app_login_7_Template, 1, 0, "app-login", 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, AppComponent_app_login_7_Template, 1, 1, "app-login", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, AppComponent_app_http_loader_8_Template, 1, 0, "app-http-loader", 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, AppComponent_app_http_loader_8_Template, 1, 0, "app-http-loader", 2);
         }
 
         if (rf & 2) {
@@ -3408,13 +3421,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.translateService.get('TOASTR').subscribe(function (response) {
             _this7.toastrMessages = response;
           });
-          this.afAuth.user.subscribe(function (response) {
-            if (response) {
-              _this7.isLoggedIn = true;
-            } else {
-              _this7.isLoggedIn = false;
-            }
-          });
           this.initLoginForm();
           this.initRegisterForm();
           this.router.events.subscribe(function (eventChange) {
@@ -3532,6 +3538,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.logiRegi = _t.first);
         }
       },
+      inputs: {
+        isLoggedIn: "isLoggedIn"
+      },
       decls: 2,
       vars: 2,
       consts: [["class", "henlo", 4, "ngIf"], [4, "ngIf"], [1, "henlo"], ["id", "logiRegiContainer", 1, "login-register"], ["logiRegi", ""], [1, "form-container", "register-container"], [3, "formGroup", "ngSubmit"], ["type", "email", "formControlName", "registerEmail", "required", "", 3, "placeholder"], ["formControlName", "registerPassword", "type", "password", "required", "", "id", "passwordInput", 3, "placeholder"], [1, "btn", "btn-dark", 3, "disabled"], [1, "form-container", "login-container"], ["type", "email", "formControlName", "email", "required", "", 3, "placeholder"], ["type", "password", "formControlName", "password", "required", "", 3, "placeholder"], ["href", "#"], [1, "overlay-container"], [1, "overlay-wrapper"], [1, "overlay-panel", "overlay-login"], ["id", "login", 1, "ghost", 3, "click"], [1, "overlay-panel", "overlay-register"], ["id", "register", 1, "ghost", 3, "click"], [1, "fa", "fa-times", 3, "click"], [1, "card"], [1, "card-header"], [1, "acc-header"], [1, "fa", "fa-times", "white-icon", 3, "click"], [1, "card-body"], [1, "btn", "btn-dark", "mr-2", 3, "routerLink"], [1, "btn", "btn-danger", 3, "click"]],
@@ -3582,6 +3591,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         logiRegi: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
           args: ['logiRegi']
+        }],
+        isLoggedIn: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }]
       });
     })();
