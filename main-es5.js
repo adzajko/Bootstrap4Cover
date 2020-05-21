@@ -2073,41 +2073,123 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_app_shared_company_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! src/app/shared/company.service */
+    "./src/app/shared/company.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/shared/auth.service */
+    "./src/app/shared/auth.service.ts");
+    /* harmony import */
+
+
+    var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ngx-toastr */
+    "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
 
     var CompanyFullPageComponent = /*#__PURE__*/function () {
-      function CompanyFullPageComponent() {
+      function CompanyFullPageComponent(companyService, router, auth, toastr) {
         _classCallCheck(this, CompanyFullPageComponent);
+
+        this.companyService = companyService;
+        this.router = router;
+        this.auth = auth;
+        this.toastr = toastr;
+        this.currentCompany = {};
+        this.currentCompanyName = '';
+        this.currentCompanyName = router.url.slice(11);
       }
 
       _createClass(CompanyFullPageComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this4 = this;
+
+          this.auth.showHTTPLoader(true);
+          this.companyService.getCompanyByName(this.currentCompanyName).subscribe(function (res) {
+            _this4.auth.showHTTPLoader(false);
+
+            res.forEach(function (element) {
+              console.log(element.payload.doc.data());
+              _this4.currentCompany = element.payload.doc.data();
+            });
+          }, function (errorRes) {
+            _this4.auth.showHTTPLoader(false);
+
+            _this4.toastr.error(errorRes.message);
+          });
+        }
       }]);
 
       return CompanyFullPageComponent;
     }();
 
     CompanyFullPageComponent.ɵfac = function CompanyFullPageComponent_Factory(t) {
-      return new (t || CompanyFullPageComponent)();
+      return new (t || CompanyFullPageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]));
     };
 
     CompanyFullPageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: CompanyFullPageComponent,
       selectors: [["app-company-full-page"]],
-      decls: 3,
-      vars: 0,
-      consts: [[1, "gradient-background", "mt-75"]],
+      decls: 8,
+      vars: 5,
+      consts: [[1, "gradient-background", "mt-75"], [3, "src", "alt"]],
       template: function CompanyFullPageComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "img", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "HELLO THIS IS FULL COMPANY PAGE THANKS");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("src", ctx.currentCompany == null ? null : ctx.currentCompany.logo, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("alt", ctx.currentCompany == null ? null : ctx.currentCompany.name);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.currentCompany == null ? null : ctx.currentCompany.name);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.currentCompany == null ? null : ctx.currentCompany.location);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.currentCompany == null ? null : ctx.currentCompany.technology);
         }
       },
       styles: [".flex-column-center[_ngcontent-%COMP%], section[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.animatedBefore[_ngcontent-%COMP%] {\n  position: relative;\n  color: whitesmoke;\n  padding: 5px;\n}\n.animatedBefore[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: whitesmoke;\n  transition: 0.4s;\n}\n.animatedBefore[_ngcontent-%COMP%]:hover::before {\n  content: \"\";\n  width: 100%;\n  transition: 0.4s;\n}\n.mt-6[_ngcontent-%COMP%] {\n  margin-top: 6rem;\n}\n.mt-75[_ngcontent-%COMP%] {\n  padding-top: 75px;\n}\n.underlineBefore[_ngcontent-%COMP%] {\n  position: relative;\n}\n.underlineBefore[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 2px;\n  background-color: whitesmoke;\n}\n.fixed-full-height[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 100%;\n}\n.td-none[_ngcontent-%COMP%] {\n  text-decoration: none;\n}\n.gradient-background[_ngcontent-%COMP%] {\n  background: linear-gradient(180deg, #2d3436, #2c3e50);\n}\n\n\n\nsection[_ngcontent-%COMP%] {\n  min-height: 100vh;\n}\nsection[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: whitesmoke;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdlcy9jb21wYW5pZXMvY29tcGFueS1mdWxsLXBhZ2UvRDpcXFdvcmtTcGFjZVxcU2VhdnVzXFxzdWJtYXJpbmUtdGVhbS5naXRodWIuaW8vc3JjXFxhc3NldHNcXHNjc3NfZXh0ZW5kYWJsZXNcXF9pbmRleC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3BhZ2VzL2NvbXBhbmllcy9jb21wYW55LWZ1bGwtcGFnZS9jb21wYW55LWZ1bGwtcGFnZS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wYWdlcy9jb21wYW5pZXMvY29tcGFueS1mdWxsLXBhZ2UvRDpcXFdvcmtTcGFjZVxcU2VhdnVzXFxzdWJtYXJpbmUtdGVhbS5naXRodWIuaW8vc3JjXFxhcHBcXGNvbXBvbmVudHNcXHBhZ2VzXFxjb21wYW5pZXNcXGNvbXBhbnktZnVsbC1wYWdlXFxjb21wYW55LWZ1bGwtcGFnZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFzQkEsdUJBQUE7QUFDQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxXQUFBO0VBQ0EsU0FBQTtFQUNBLE9BQUE7RUFDQSw0QkFBQTtFQUNBLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsV0FBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsaUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLE9BQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSw0QkFBQTtBQ3JCRjtBRHVCQTtFQUNFLGVBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0EsWUFBQTtBQ3BCRjtBRHVCQTtFQUNFLHFCQUFBO0FDcEJGO0FEdUJBO0VBQ0UscURBQUE7QUNwQkY7QUR1QkEsMkJBQUE7QUFFQSxzQkFBQTtBQXFDQSx5QkFBQTtBRWhJQTtFQUNFLGlCQUFBO0FEd0VGO0FDdEVFO0VBQ0UsaUJBQUE7QUR3RUoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3BhZ2VzL2NvbXBhbmllcy9jb21wYW55LWZ1bGwtcGFnZS9jb21wYW55LWZ1bGwtcGFnZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiRjb2xvcnM6IChcclxuICBcImJveC1zaGFkb3ctY29sb3JcIjogcmdiYSgwLCAwLCAwLCAwLjQpLFxyXG4gIFwicGVhY2hDb2xvclwiOiByZ2JhKDIxMiwgMTEzLCAxMTMsIDEpLFxyXG4gIFwiZ3JleURhcmtcIjogcmdiYSgwLCAwLCAwLCAwLjcpLFxyXG4gIFwiYmx1ZUhlYWRlclwiOiAjMmMzZTUwLFxyXG4gIFwid2hpdGVHcmV5XCI6IHdoaXRlc21va2UsXHJcbik7XHJcblxyXG4kZm9udFNpemVzOiAoXHJcbiAgXCJoMVwiOiA3MnB4LFxyXG4gIFwiaDJcIjogMzZweCxcclxuICBcImgzXCI6IDI0cHgsXHJcbik7XHJcblxyXG5AZnVuY3Rpb24gZ2V0Q29sb3IoJGNvbG9yTmFtZSkge1xyXG4gIEByZXR1cm4gbWFwLWdldCgkY29sb3JzLCAkY29sb3JOYW1lKTtcclxufVxyXG5cclxuQGZ1bmN0aW9uIGdldEZvbnRTaXplKCRmb250KSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRmb250U2l6ZXMsICRmb250KTtcclxufVxyXG5cclxuLyogRXh0ZW5kYWJsZSBjbGFzc2VzICovXHJcbi5mbGV4LWNvbHVtbi1jZW50ZXIge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG59XHJcblxyXG4uYW5pbWF0ZWRCZWZvcmUge1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICBwYWRkaW5nOiA1cHg7XHJcbn1cclxuXHJcbi5hbmltYXRlZEJlZm9yZTo6YmVmb3JlIHtcclxuICBjb250ZW50OiBcIlwiO1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB3aWR0aDogMDtcclxuICBoZWlnaHQ6IDJweDtcclxuICBib3R0b206IDA7XHJcbiAgbGVmdDogMDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gIHRyYW5zaXRpb246IDAuNHM7XHJcbn1cclxuXHJcbi5hbmltYXRlZEJlZm9yZTpob3Zlcjo6YmVmb3JlIHtcclxuICBjb250ZW50OiBcIlwiO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIHRyYW5zaXRpb246IDAuNHM7XHJcbn1cclxuXHJcbi5tdC02IHtcclxuICBtYXJnaW4tdG9wOiA2cmVtO1xyXG59XHJcblxyXG4ubXQtNzUge1xyXG4gIHBhZGRpbmctdG9wOiA3NXB4O1xyXG59XHJcblxyXG4udW5kZXJsaW5lQmVmb3JlIHtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuXHJcbi51bmRlcmxpbmVCZWZvcmU6OmJlZm9yZSB7XHJcbiAgY29udGVudDogXCJcIjtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgbGVmdDogMDtcclxuICBib3R0b206IDA7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAycHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcclxufVxyXG4uZml4ZWQtZnVsbC1oZWlnaHQge1xyXG4gIHBvc2l0aW9uOiBmaXhlZDtcclxuICB0b3A6IDA7XHJcbiAgbGVmdDogMDtcclxuICByaWdodDogMDtcclxuICBib3R0b206IDA7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4udGQtbm9uZSB7XHJcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG59XHJcblxyXG4uZ3JhZGllbnQtYmFja2dyb3VuZCB7XHJcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE4MGRlZywgIzJkMzQzNiwgIzJjM2U1MCk7XHJcbn1cclxuXHJcbi8qIEV4dGVuZGFibGUgY2xhc3NlcyBlbmQgKi9cclxuXHJcbi8qIFJlc3BvbnNpdmUgTWl4aW5zICovXHJcblxyXG5AbWl4aW4gc21hbGxQaG9uZU1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XHJcbiAgICBAY29udGVudDtcclxuICB9XHJcbn1cclxuQG1peGluIG1lZGl1bVBob25lTWl4aW4ge1xyXG4gIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMzI1cHgpIGFuZCAobWF4LXdpZHRoOiA5OTJweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBsYXJnZVBob25lTWl4aW4ge1xyXG4gIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNjAwcHgpIGFuZCAobWF4LXdpZHRoOiA3NjhweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiB0YWJsZXRNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA3NjhweCkgYW5kIChtYXgtd2lkdGg6IDk5MnB4KSB7XHJcbiAgICBAY29udGVudDtcclxuICB9XHJcbn1cclxuQG1peGluIHNtYWxsRGVza3RvcE1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDk5MnB4KSBhbmQgKG1heC13aWR0aDogMTIwMHB4KSB7XHJcbiAgICBAY29udGVudDtcclxuICB9XHJcbn1cclxuQG1peGluIGxhcmdlRGVza3RvcE1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDEyMDBweCkgYW5kIChtYXgtd2lkdGg6IDE0NDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBFeHRyYUxhcmdlRGVza3RvcE1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDE0NDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbi8qUmVzcG9uc2l2ZSBNaXhpbnMgRU5EICovXHJcbiIsIi8qIEV4dGVuZGFibGUgY2xhc3NlcyAqL1xuLmZsZXgtY29sdW1uLWNlbnRlciwgc2VjdGlvbiB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uYW5pbWF0ZWRCZWZvcmUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGNvbG9yOiB3aGl0ZXNtb2tlO1xuICBwYWRkaW5nOiA1cHg7XG59XG5cbi5hbmltYXRlZEJlZm9yZTo6YmVmb3JlIHtcbiAgY29udGVudDogXCJcIjtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogMDtcbiAgaGVpZ2h0OiAycHg7XG4gIGJvdHRvbTogMDtcbiAgbGVmdDogMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcbiAgdHJhbnNpdGlvbjogMC40cztcbn1cblxuLmFuaW1hdGVkQmVmb3JlOmhvdmVyOjpiZWZvcmUge1xuICBjb250ZW50OiBcIlwiO1xuICB3aWR0aDogMTAwJTtcbiAgdHJhbnNpdGlvbjogMC40cztcbn1cblxuLm10LTYge1xuICBtYXJnaW4tdG9wOiA2cmVtO1xufVxuXG4ubXQtNzUge1xuICBwYWRkaW5nLXRvcDogNzVweDtcbn1cblxuLnVuZGVybGluZUJlZm9yZSB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLnVuZGVybGluZUJlZm9yZTo6YmVmb3JlIHtcbiAgY29udGVudDogXCJcIjtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBsZWZ0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDJweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcbn1cblxuLmZpeGVkLWZ1bGwtaGVpZ2h0IHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLnRkLW5vbmUge1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG59XG5cbi5ncmFkaWVudC1iYWNrZ3JvdW5kIHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE4MGRlZywgIzJkMzQzNiwgIzJjM2U1MCk7XG59XG5cbi8qIEV4dGVuZGFibGUgY2xhc3NlcyBlbmQgKi9cbi8qIFJlc3BvbnNpdmUgTWl4aW5zICovXG4vKlJlc3BvbnNpdmUgTWl4aW5zIEVORCAqL1xuc2VjdGlvbiB7XG4gIG1pbi1oZWlnaHQ6IDEwMHZoO1xufVxuc2VjdGlvbiBwIHtcbiAgY29sb3I6IHdoaXRlc21va2U7XG59IiwiQGltcG9ydCAnLi4vLi4vLi4vLi4vLi4vYXNzZXRzL3Njc3NfZXh0ZW5kYWJsZXMvaW5kZXgnO1xyXG5cclxuc2VjdGlvbiB7XHJcbiAgbWluLWhlaWdodDogMTAwdmg7XHJcbiAgQGV4dGVuZCAuZmxleC1jb2x1bW4tY2VudGVyO1xyXG4gIHAge1xyXG4gICAgY29sb3I6IGdldENvbG9yKHdoaXRlR3JleSk7XHJcbiAgfVxyXG59XHJcbiJdfQ== */"]
@@ -2123,7 +2205,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           styleUrls: ['./company-full-page.component.scss']
         }]
       }], function () {
-        return [];
+        return [{
+          type: src_app_shared_company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }, {
+          type: src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+        }, {
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]
+        }];
       }, null);
     })();
     /***/
@@ -2223,16 +2313,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "post",
         value: function post(comment) {
-          var _this4 = this;
+          var _this5 = this;
 
           this.contactService.postComment(comment).then(function (response) {
-            _this4.authService.showHTTPLoader(false);
+            _this5.authService.showHTTPLoader(false);
 
-            _this4.toastrService.success('Thank You!');
+            _this5.toastrService.success('Thank You!');
           })["catch"](function (errorRes) {
-            _this4.authService.showHTTPLoader(false);
+            _this5.authService.showHTTPLoader(false);
 
-            _this4.toastrService.error(errorRes.message, 'Error.');
+            _this5.toastrService.error(errorRes.message, 'Error.');
           });
         }
       }]);
@@ -2662,35 +2752,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(HomeComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this5 = this;
+          var _this6 = this;
 
           this.auth.showHTTPLoader(true);
           this.reviewService.getReviews().subscribe(function (data) {
-            _this5.auth.showHTTPLoader(false);
+            _this6.auth.showHTTPLoader(false);
 
-            _this5.reviewList = data.map(function (e) {
+            _this6.reviewList = data.map(function (e) {
               return {
                 data: e.payload.doc.data(),
                 id: e.payload.doc.id
               };
             });
-            _this5.listOfReviews = _this5.reviewList;
+            _this6.listOfReviews = _this6.reviewList;
           }, function (errorRes) {
-            _this5.toastr.error(errorRes.message, 'Error.');
+            _this6.toastr.error(errorRes.message, 'Error.');
 
-            _this5.auth.showHTTPLoader(false);
+            _this6.auth.showHTTPLoader(false);
           });
         }
       }, {
         key: "checkIfLoggedIn",
         value: function checkIfLoggedIn() {
-          var _this6 = this;
+          var _this7 = this;
 
           this.afAuth.onAuthStateChanged(function (user) {
             if (user) {
-              _this6.loggedIn = true;
+              _this7.loggedIn = true;
             } else {
-              _this6.loggedIn = false;
+              _this7.loggedIn = false;
             }
           });
         }
@@ -3669,16 +3759,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(LoginComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this7 = this;
+          var _this8 = this;
 
           this.translateService.get('TOASTR').subscribe(function (response) {
-            _this7.toastrMessages = response;
+            _this8.toastrMessages = response;
           });
           this.initLoginForm();
           this.initRegisterForm();
           this.router.events.subscribe(function (eventChange) {
             if (eventChange instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationStart"]) {
-              _this7.closeModal();
+              _this8.closeModal();
             }
           });
         }
@@ -3695,17 +3785,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onRegisterFormSubmit",
         value: function onRegisterFormSubmit() {
-          var _this8 = this;
+          var _this9 = this;
 
           this.auth.showHTTPLoader(true);
           this.auth.signUp(this.registerForm.value.registerEmail, this.registerForm.value.registerPassword).then(function (response) {
-            _this8.sharedService.emitLoginModalState(false);
+            _this9.sharedService.emitLoginModalState(false);
 
-            _this8.auth.showHTTPLoader(false);
+            _this9.auth.showHTTPLoader(false);
           })["catch"](function (error) {
-            _this8.auth.showHTTPLoader(false);
+            _this9.auth.showHTTPLoader(false);
 
-            _this8.toastrService.error(error.message, _this8.toastrMessages.ERROR_TITLE);
+            _this9.toastrService.error(error.message, _this9.toastrMessages.ERROR_TITLE);
           });
         }
       }, {
@@ -3716,20 +3806,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "forgotPasswordDialog",
         value: function forgotPasswordDialog(form) {
-          var _this9 = this;
+          var _this10 = this;
 
           var email = Object.values(form.form.value)[0];
           this.auth.showHTTPLoader(true);
           this.auth.afAuth.sendPasswordResetEmail(email).then(function (res) {
-            _this9.auth.showHTTPLoader(false);
+            _this10.auth.showHTTPLoader(false);
 
-            _this9.toastrService.success(_this9.toastrMessages.PASS_RESET, _this9.toastrMessages.SUCCESS_TITLE);
+            _this10.toastrService.success(_this10.toastrMessages.PASS_RESET, _this10.toastrMessages.SUCCESS_TITLE);
 
-            _this9.showDialog = false;
+            _this10.showDialog = false;
           })["catch"](function (errorRes) {
-            _this9.auth.showHTTPLoader(false);
+            _this10.auth.showHTTPLoader(false);
 
-            _this9.toastrService.error(errorRes.message, _this9.toastrMessages.ERROR_TITLE);
+            _this10.toastrService.error(errorRes.message, _this10.toastrMessages.ERROR_TITLE);
           });
         }
       }, {
@@ -3745,19 +3835,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onLoginFormSubmit",
         value: function onLoginFormSubmit() {
-          var _this10 = this;
+          var _this11 = this;
 
           this.auth.showHTTPLoader(true);
           this.auth.signIn(this.loginForm.value.email, this.loginForm.value.password).then(function (response) {
-            _this10.toastrService.success(_this10.toastrMessages.SUCCESFULL_LOGIN, _this10.toastrMessages.SUCCESS_TITLE);
+            _this11.toastrService.success(_this11.toastrMessages.SUCCESFULL_LOGIN, _this11.toastrMessages.SUCCESS_TITLE);
 
-            _this10.sharedService.emitLoginModalState(false);
+            _this11.sharedService.emitLoginModalState(false);
 
-            _this10.auth.showHTTPLoader(false);
+            _this11.auth.showHTTPLoader(false);
           })["catch"](function (error) {
-            _this10.toastrService.error(error.message, _this10.toastrMessages.ERROR_TITLE);
+            _this11.toastrService.error(error.message, _this11.toastrMessages.ERROR_TITLE);
 
-            _this10.auth.showHTTPLoader(false);
+            _this11.auth.showHTTPLoader(false);
           });
         }
       }, {
@@ -3773,15 +3863,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "logOut",
         value: function logOut() {
-          var _this11 = this;
+          var _this12 = this;
 
           this.afAuth.signOut().then(function (response) {
-            _this11.sharedService.emitLoginModalState(false);
+            _this12.sharedService.emitLoginModalState(false);
 
-            _this11.router.navigate(['/']);
+            _this12.router.navigate(['/']);
 
-            _this11.translateService.get('TOASTR').subscribe(function (res) {
-              _this11.toastrService.success(res.SIGNED_OUT, res.SUCCESS_TITLE);
+            _this12.translateService.get('TOASTR').subscribe(function (res) {
+              _this12.toastrService.success(res.SIGNED_OUT, res.SUCCESS_TITLE);
             });
           })["catch"](function (err) {
             console.log(err);
@@ -4162,22 +4252,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(MyAccountComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this12 = this;
+          var _this13 = this;
 
           this.translateService.get('TOASTR').subscribe(function (response) {
-            _this12.toastrMessages = response;
+            _this13.toastrMessages = response;
           });
           this.authService.showHTTPLoader(true);
           this.subscription = this.companyService.getCompanies().subscribe(function (data) {
-            _this12.authService.showHTTPLoader(false);
+            _this13.authService.showHTTPLoader(false);
 
             data.map(function (e) {
-              _this12.companies.push(e.payload.doc.data());
+              _this13.companies.push(e.payload.doc.data());
             });
           }, function (errorRes) {
-            _this12.authService.showHTTPLoader(false);
+            _this13.authService.showHTTPLoader(false);
 
-            _this12.toastr.error(errorRes.message, _this12.toastrMessages.ERROR_TITLE);
+            _this13.toastr.error(errorRes.message, _this13.toastrMessages.ERROR_TITLE);
           });
           this.initForms();
         } // <Create new review>
@@ -4185,7 +4275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "create",
         value: function create() {
-          var _this13 = this;
+          var _this14 = this;
 
           this.authService.showHTTPLoader(true);
           var review = this.inputForm.value;
@@ -4198,25 +4288,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
           this.authService.getUsername().subscribe(function (e) {
             if (!e.emailVerified) {
-              _this13.toastr.error(_this13.toastrMessages.UNVERIFIED, _this13.toastrMessages.ERROR_TITLE);
+              _this14.toastr.error(_this14.toastrMessages.UNVERIFIED, _this14.toastrMessages.ERROR_TITLE);
 
-              _this13.authService.showHTTPLoader(false);
+              _this14.authService.showHTTPLoader(false);
 
               return;
             }
 
             review.userName = e.email;
 
-            _this13.reviewService.postReview(review).then(function (response) {
-              _this13.reviewService.upvoteReview(response.id, 0, '');
+            _this14.reviewService.postReview(review).then(function (response) {
+              _this14.reviewService.upvoteReview(response.id, 0, '');
 
-              _this13.authService.showHTTPLoader(false);
+              _this14.authService.showHTTPLoader(false);
 
-              _this13.toastr.success(_this13.toastrMessages.SUBMITTED_REVIEW, _this13.toastrMessages.SUCCESS_TITLE);
+              _this14.toastr.success(_this14.toastrMessages.SUBMITTED_REVIEW, _this14.toastrMessages.SUCCESS_TITLE);
             })["catch"](function (errorRes) {
-              _this13.authService.showHTTPLoader(false);
+              _this14.authService.showHTTPLoader(false);
 
-              _this13.toastr.error(errorRes.message, _this13.toastrMessages.ERROR_TITLE);
+              _this14.toastr.error(errorRes.message, _this14.toastrMessages.ERROR_TITLE);
             });
           });
         } // </Create new review>
@@ -4224,14 +4314,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "requestVerification",
         value: function requestVerification() {
-          var _this14 = this;
+          var _this15 = this;
 
           if (this.accountChangesForm.value.linkedInAccount) {
             this.authService.showHTTPLoader(true);
             this.authService.getUsername().subscribe(function (e) {
-              _this14.af.collection('verifications').add({
+              _this15.af.collection('verifications').add({
                 email: e.email,
-                linkedin: _this14.accountChangesForm.value.linkedInAccount
+                linkedin: _this15.accountChangesForm.value.linkedInAccount
               });
             });
             this.authService.showHTTPLoader(false);
@@ -4244,7 +4334,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "changeEmail",
         value: function changeEmail() {
-          var _this15 = this;
+          var _this16 = this;
 
           var email = this.accountChangesForm.value.changeEmailInput;
 
@@ -4253,9 +4343,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             this.authService.afAuth.currentUser.then(function (user) {
               return user.updateEmail(email).then(function () {
-                _this15.toastr.success(_this15.toastrMessages.EMAIL_CHANGED, _this15.toastrMessages.SUCCESS_TITLE);
+                _this16.toastr.success(_this16.toastrMessages.EMAIL_CHANGED, _this16.toastrMessages.SUCCESS_TITLE);
               })["catch"](function (err) {
-                _this15.toastr.error(err.message, _this15.toastrMessages.ERROR_TITLE);
+                _this16.toastr.error(err.message, _this16.toastrMessages.ERROR_TITLE);
               });
             });
           }
@@ -4273,13 +4363,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deleteAccountDialog",
         value: function deleteAccountDialog() {
-          var _this16 = this;
+          var _this17 = this;
 
           this.authService.afAuth.currentUser.then(function (user) {
             return user["delete"]().then(function () {
-              _this16.toastr.success(_this16.toastrMessages.USER_DELETED, _this16.toastrMessages.SUCCESS_TITLE);
+              _this17.toastr.success(_this17.toastrMessages.USER_DELETED, _this17.toastrMessages.SUCCESS_TITLE);
             })["catch"](function (err) {
-              _this16.toastr.error(err.message, _this16.toastrMessages.ERROR_TITLE);
+              _this17.toastr.error(err.message, _this17.toastrMessages.ERROR_TITLE);
             });
           });
           this.toggleAccountDel();
@@ -4287,20 +4377,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "updatePassword",
         value: function updatePassword() {
-          var _this17 = this;
+          var _this18 = this;
 
           if (this.accountChangesForm.value.newPassword && this.accountChangesForm.value.newPasswordConfirm) {
             if (this.accountChangesForm.value.newPassword === this.accountChangesForm.value.newPasswordConfirm) {
               this.authService.showHTTPLoader(true);
               this.authService.getUsername().subscribe(function (e) {
-                e.updatePassword(_this17.accountChangesForm.value.newPassword).then(function () {
-                  _this17.authService.showHTTPLoader(false);
+                e.updatePassword(_this18.accountChangesForm.value.newPassword).then(function () {
+                  _this18.authService.showHTTPLoader(false);
 
-                  _this17.toastr.success(_this17.toastrMessages.UPDATE_PASS, _this17.toastrMessages.SUCCESS_TITLE);
+                  _this18.toastr.success(_this18.toastrMessages.UPDATE_PASS, _this18.toastrMessages.SUCCESS_TITLE);
                 })["catch"](function (err) {
-                  _this17.authService.showHTTPLoader(false);
+                  _this18.authService.showHTTPLoader(false);
 
-                  _this17.toastr.error(err.message, _this17.toastrMessages.ERROR_TITLE);
+                  _this18.toastr.error(err.message, _this18.toastrMessages.ERROR_TITLE);
                 });
               });
             } else {
@@ -5013,10 +5103,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(FullListComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this18 = this;
+          var _this19 = this;
 
           this.reviewService.getReviews().subscribe(function (response) {
-            _this18.listOfReviews = response.map(function (e) {
+            _this19.listOfReviews = response.map(function (e) {
               return {
                 data: e.payload.doc.data(),
                 id: e.payload.doc.id
@@ -5125,41 +5215,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! moment */
-    "./node_modules/moment/moment.js");
-    /* harmony import */
-
-
-    var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-    /* harmony import */
-
-
-    var _shared_review_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _shared_review_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../../../shared/review.service */
     "./src/app/shared/review.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
     /* harmony import */
 
 
-    var _angular_material_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_material_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/material/button */
     "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
     /* harmony import */
 
 
-    var src_app_components_reviews_votes_container_votes_container_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var src_app_components_reviews_votes_container_votes_container_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! src/app/components/reviews/votes-container/votes-container.component */
     "./src/app/components/reviews/votes-container/votes-container.component.ts");
     /* harmony import */
 
 
-    var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @ngx-translate/core */
     "./node_modules/@ngx-translate/core/__ivy_ngcc__/fesm2015/ngx-translate-core.js");
 
@@ -5192,6 +5272,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function ReviewElementComponent(config, reviewService) {
         _classCallCheck(this, ReviewElementComponent);
 
+        this.reviewService = reviewService;
         this.formattedDate = '';
         config.readonly = true;
       }
@@ -5199,14 +5280,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ReviewElementComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.formattedDate = this.formatDate(this.reviewElement);
+          this.formattedDate = this.reviewService.formatDate(this.reviewElement);
           this.currentRate = this.reviewElement.data.rating;
-        }
-      }, {
-        key: "formatDate",
-        value: function formatDate(element) {
-          element = element.data.timeStamp.toDate();
-          return moment__WEBPACK_IMPORTED_MODULE_2__(element).format('DD. MM. YYYY');
         }
       }]);
 
@@ -5214,7 +5289,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     ReviewElementComponent.ɵfac = function ReviewElementComponent_Factory(t) {
-      return new (t || ReviewElementComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbRatingConfig"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_review_service__WEBPACK_IMPORTED_MODULE_3__["ReviewService"]));
+      return new (t || ReviewElementComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbRatingConfig"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_review_service__WEBPACK_IMPORTED_MODULE_2__["ReviewService"]));
     };
 
     ReviewElementComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -5342,8 +5417,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("id", ctx.reviewElement.id)("username", ctx.reviewElement.data.userName);
         }
       },
-      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLinkWithHref"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbRating"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLink"], src_app_components_reviews_votes_container_votes_container_component__WEBPACK_IMPORTED_MODULE_6__["VotesContainerComponent"]],
-      pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__["TranslatePipe"]],
+      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLinkWithHref"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbRating"], _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButton"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], src_app_components_reviews_votes_container_votes_container_component__WEBPACK_IMPORTED_MODULE_5__["VotesContainerComponent"]],
+      pipes: [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslatePipe"]],
       styles: [".flex-column-center[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.animatedBefore[_ngcontent-%COMP%], .card-header[_ngcontent-%COMP%]   .card-title[_ngcontent-%COMP%] {\n  position: relative;\n  color: whitesmoke;\n  padding: 5px;\n}\n.animatedBefore[_ngcontent-%COMP%]::before, .card-header[_ngcontent-%COMP%]   .card-title[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: whitesmoke;\n  transition: 0.4s;\n}\n.animatedBefore[_ngcontent-%COMP%]:hover::before, .card-header[_ngcontent-%COMP%]   .card-title[_ngcontent-%COMP%]:hover::before {\n  content: \"\";\n  width: 100%;\n  transition: 0.4s;\n}\n.mt-6[_ngcontent-%COMP%] {\n  margin-top: 6rem;\n}\n.mt-75[_ngcontent-%COMP%] {\n  padding-top: 75px;\n}\n.underlineBefore[_ngcontent-%COMP%] {\n  position: relative;\n}\n.underlineBefore[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 2px;\n  background-color: whitesmoke;\n}\n.fixed-full-height[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 100%;\n}\n.td-none[_ngcontent-%COMP%] {\n  text-decoration: none;\n}\n.gradient-background[_ngcontent-%COMP%] {\n  background: linear-gradient(180deg, #2d3436, #2c3e50);\n}\n\n\n\n.review-container[_ngcontent-%COMP%] {\n  height: 200px;\n  display: flex;\n  box-shadow: 5px 3px 3px 0 rgba(0, 0, 0, 0.4);\n  width: 100%;\n  border: 1px solid #2c3e50;\n  position: relative;\n}\n@media only screen and (max-width: 600px) {\n  .review-container[_ngcontent-%COMP%] {\n    display: block;\n    height: 100%;\n  }\n}\n.card-aside[_ngcontent-%COMP%] {\n  background-color: #dfe6e9;\n}\n.card-aside[_ngcontent-%COMP%]   .img-container[_ngcontent-%COMP%]   .img-fluid[_ngcontent-%COMP%] {\n  width: 150px;\n  padding: 10px;\n}\n@media only screen and (max-width: 600px) {\n  .card-aside[_ngcontent-%COMP%]   .img-container[_ngcontent-%COMP%]   .img-fluid[_ngcontent-%COMP%] {\n    width: 100px;\n    display: block;\n    margin: auto;\n    padding: 5px;\n    height: 75px;\n  }\n}\n.card-aside[_ngcontent-%COMP%]   p.text-center.my-md-2.my-sm-0.font-italic[_ngcontent-%COMP%] {\n  color: rgba(0, 0, 0, 0.4);\n}\n@media only screen and (max-width: 600px) {\n  .card-aside[_ngcontent-%COMP%]   p.text-center.my-md-2.my-sm-0.font-italic[_ngcontent-%COMP%] {\n    margin-bottom: 0;\n  }\n}\n.card[_ngcontent-%COMP%] {\n  background: linear-gradient(163deg, #444a50 0%, #2c3e50 80%);\n  flex: 1;\n  border: 0;\n  border-radius: 0px !important;\n}\n.card-header[_ngcontent-%COMP%]:first-child {\n  border-radius: 0px !important;\n}\n.card-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  background: #2c3e50;\n}\n@media only screen and (max-width: 600px) {\n  .card-header[_ngcontent-%COMP%] {\n    display: block;\n  }\n}\n.card-header[_ngcontent-%COMP%]   .card-title[_ngcontent-%COMP%] {\n  font-size: 30px;\n  margin: 0;\n  text-decoration: none;\n}\n@media only screen and (min-width: 325px) and (max-width: 992px) {\n  .card-header[_ngcontent-%COMP%]   .card-title[_ngcontent-%COMP%] {\n    font-size: 26px;\n  }\n}\n.card-body[_ngcontent-%COMP%] {\n  color: whitesmoke;\n}\n.card-body[_ngcontent-%COMP%]   button.see-more-btn[_ngcontent-%COMP%] {\n  width: 100px;\n}\n.card-body[_ngcontent-%COMP%]   #textTruncate[_ngcontent-%COMP%] {\n  width: 700px;\n}\n@media only screen and (min-width: 325px) and (max-width: 992px) {\n  .card-body[_ngcontent-%COMP%]   #textTruncate[_ngcontent-%COMP%] {\n    width: 200px;\n  }\n}\n@media only screen and (min-width: 992px) and (max-width: 1200px) {\n  .card-body[_ngcontent-%COMP%]   #textTruncate[_ngcontent-%COMP%] {\n    width: 400px;\n  }\n}\n@media only screen and (min-width: 1200px) and (max-width: 1440px) {\n  .card-body[_ngcontent-%COMP%]   #textTruncate[_ngcontent-%COMP%] {\n    width: 400px;\n  }\n}\napp-votes-container[_ngcontent-%COMP%] {\n  position: relative;\n  bottom: 15%;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n}\nngb-rating[_ngcontent-%COMP%]:focus {\n  outline: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yZXZpZXdzL3Jldmlldy1lbGVtZW50L0Q6XFxXb3JrU3BhY2VcXFNlYXZ1c1xcc3VibWFyaW5lLXRlYW0uZ2l0aHViLmlvL3NyY1xcYXNzZXRzXFxzY3NzX2V4dGVuZGFibGVzXFxfaW5kZXguc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9yZXZpZXdzL3Jldmlldy1lbGVtZW50L3Jldmlldy1lbGVtZW50LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3Jldmlld3MvcmV2aWV3LWVsZW1lbnQvRDpcXFdvcmtTcGFjZVxcU2VhdnVzXFxzdWJtYXJpbmUtdGVhbS5naXRodWIuaW8vc3JjXFxhcHBcXGNvbXBvbmVudHNcXHJldmlld3NcXHJldmlldy1lbGVtZW50XFxyZXZpZXctZWxlbWVudC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFzQkEsdUJBQUE7QUFDQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxXQUFBO0VBQ0EsU0FBQTtFQUNBLE9BQUE7RUFDQSw0QkFBQTtFQUNBLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsV0FBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsaUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLE9BQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSw0QkFBQTtBQ3JCRjtBRHVCQTtFQUNFLGVBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0EsWUFBQTtBQ3BCRjtBRHVCQTtFQUNFLHFCQUFBO0FDcEJGO0FEdUJBO0VBQ0UscURBQUE7QUNwQkY7QUR1QkEsMkJBQUE7QUFFQSxzQkFBQTtBQXFDQSx5QkFBQTtBRWhJQTtFQUNFLGFBQUE7RUFDQSxhQUFBO0VBS0EsNENBQUE7RUFDQSxXQUFBO0VBQ0EseUJBQUE7RUFDQSxrQkFBQTtBRG9FRjtBRGdCRTtFRTlGRjtJQUlJLGNBQUE7SUFDQSxZQUFBO0VEOEVGO0FBQ0Y7QUN2RUE7RUFDRSx5QkFBQTtBRDBFRjtBQ3hFSTtFQUNFLFlBQUE7RUFDQSxhQUFBO0FEMEVOO0FERUU7RUU5RUU7SUFJSSxZQUFBO0lBQ0EsY0FBQTtJQUNBLFlBQUE7SUFDQSxZQUFBO0lBQ0EsWUFBQTtFRDRFTjtBQUNGO0FDekVFO0VBQ0UseUJBQUE7QUQyRUo7QURWRTtFRWxFQTtJQUdJLGdCQUFBO0VENkVKO0FBQ0Y7QUN6RUE7RUFDRSw0REFBQTtFQUNBLE9BQUE7RUFDQSxTQUFBO0VBQ0EsNkJBQUE7QUQ0RUY7QUN6RUE7RUFDRSw2QkFBQTtBRDRFRjtBQ3pFQTtFQUNFLGFBQUE7RUFDQSw4QkFBQTtFQUtBLG1CQUFBO0FEd0VGO0FEaENFO0VFL0NGO0lBSUksY0FBQTtFRCtFRjtBQUNGO0FDNUVFO0VBSUUsZUFBQTtFQUNBLFNBQUE7RUFDQSxxQkFBQTtBRDJFSjtBRHJDRTtFRTVDQTtJQUVJLGVBQUE7RURtRko7QUFDRjtBQzNFQTtFQUlFLGlCQUFBO0FEMkVGO0FDOUVFO0VBQ0UsWUFBQTtBRGdGSjtBQzdFRTtFQUNFLFlBQUE7QUQrRUo7QURwREU7RUU1QkE7SUFHSSxZQUFBO0VEaUZKO0FBQ0Y7QUQxQ0U7RUUzQ0E7SUFNSSxZQUFBO0VEbUZKO0FBQ0Y7QUQxQ0U7RUVoREE7SUFTSSxZQUFBO0VEcUZKO0FBQ0Y7QUNsRkE7RUFDRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSwyQkFBQTtBRHFGRjtBQ25GQTtFQUNFLGFBQUE7QURzRkYiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Jldmlld3MvcmV2aWV3LWVsZW1lbnQvcmV2aWV3LWVsZW1lbnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIkY29sb3JzOiAoXHJcbiAgXCJib3gtc2hhZG93LWNvbG9yXCI6IHJnYmEoMCwgMCwgMCwgMC40KSxcclxuICBcInBlYWNoQ29sb3JcIjogcmdiYSgyMTIsIDExMywgMTEzLCAxKSxcclxuICBcImdyZXlEYXJrXCI6IHJnYmEoMCwgMCwgMCwgMC43KSxcclxuICBcImJsdWVIZWFkZXJcIjogIzJjM2U1MCxcclxuICBcIndoaXRlR3JleVwiOiB3aGl0ZXNtb2tlLFxyXG4pO1xyXG5cclxuJGZvbnRTaXplczogKFxyXG4gIFwiaDFcIjogNzJweCxcclxuICBcImgyXCI6IDM2cHgsXHJcbiAgXCJoM1wiOiAyNHB4LFxyXG4pO1xyXG5cclxuQGZ1bmN0aW9uIGdldENvbG9yKCRjb2xvck5hbWUpIHtcclxuICBAcmV0dXJuIG1hcC1nZXQoJGNvbG9ycywgJGNvbG9yTmFtZSk7XHJcbn1cclxuXHJcbkBmdW5jdGlvbiBnZXRGb250U2l6ZSgkZm9udCkge1xyXG4gIEByZXR1cm4gbWFwLWdldCgkZm9udFNpemVzLCAkZm9udCk7XHJcbn1cclxuXHJcbi8qIEV4dGVuZGFibGUgY2xhc3NlcyAqL1xyXG4uZmxleC1jb2x1bW4tY2VudGVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuLmFuaW1hdGVkQmVmb3JlIHtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgY29sb3I6IHdoaXRlc21va2U7XHJcbiAgcGFkZGluZzogNXB4O1xyXG59XHJcblxyXG4uYW5pbWF0ZWRCZWZvcmU6OmJlZm9yZSB7XHJcbiAgY29udGVudDogXCJcIjtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgd2lkdGg6IDA7XHJcbiAgaGVpZ2h0OiAycHg7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcclxuICB0cmFuc2l0aW9uOiAwLjRzO1xyXG59XHJcblxyXG4uYW5pbWF0ZWRCZWZvcmU6aG92ZXI6OmJlZm9yZSB7XHJcbiAgY29udGVudDogXCJcIjtcclxuICB3aWR0aDogMTAwJTtcclxuICB0cmFuc2l0aW9uOiAwLjRzO1xyXG59XHJcblxyXG4ubXQtNiB7XHJcbiAgbWFyZ2luLXRvcDogNnJlbTtcclxufVxyXG5cclxuLm10LTc1IHtcclxuICBwYWRkaW5nLXRvcDogNzVweDtcclxufVxyXG5cclxuLnVuZGVybGluZUJlZm9yZSB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4udW5kZXJsaW5lQmVmb3JlOjpiZWZvcmUge1xyXG4gIGNvbnRlbnQ6IFwiXCI7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGxlZnQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMnB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XHJcbn1cclxuLmZpeGVkLWZ1bGwtaGVpZ2h0IHtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGhlaWdodDogMTAwJTtcclxufVxyXG5cclxuLnRkLW5vbmUge1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxufVxyXG5cclxuLmdyYWRpZW50LWJhY2tncm91bmQge1xyXG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxODBkZWcsICMyZDM0MzYsICMyYzNlNTApO1xyXG59XHJcblxyXG4vKiBFeHRlbmRhYmxlIGNsYXNzZXMgZW5kICovXHJcblxyXG4vKiBSZXNwb25zaXZlIE1peGlucyAqL1xyXG5cclxuQG1peGluIHNtYWxsUGhvbmVNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBtZWRpdW1QaG9uZU1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDMyNXB4KSBhbmQgKG1heC13aWR0aDogOTkycHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gbGFyZ2VQaG9uZU1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDYwMHB4KSBhbmQgKG1heC13aWR0aDogNzY4cHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gdGFibGV0TWl4aW4ge1xyXG4gIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzY4cHgpIGFuZCAobWF4LXdpZHRoOiA5OTJweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBzbWFsbERlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA5OTJweCkgYW5kIChtYXgtd2lkdGg6IDEyMDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBsYXJnZURlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMjAwcHgpIGFuZCAobWF4LXdpZHRoOiAxNDQwcHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gRXh0cmFMYXJnZURlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxNDQwcHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG4vKlJlc3BvbnNpdmUgTWl4aW5zIEVORCAqL1xyXG4iLCIvKiBFeHRlbmRhYmxlIGNsYXNzZXMgKi9cbi5mbGV4LWNvbHVtbi1jZW50ZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmFuaW1hdGVkQmVmb3JlLCAuY2FyZC1oZWFkZXIgLmNhcmQtdGl0bGUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGNvbG9yOiB3aGl0ZXNtb2tlO1xuICBwYWRkaW5nOiA1cHg7XG59XG5cbi5hbmltYXRlZEJlZm9yZTo6YmVmb3JlLCAuY2FyZC1oZWFkZXIgLmNhcmQtdGl0bGU6OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgd2lkdGg6IDA7XG4gIGhlaWdodDogMnB4O1xuICBib3R0b206IDA7XG4gIGxlZnQ6IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG4gIHRyYW5zaXRpb246IDAuNHM7XG59XG5cbi5hbmltYXRlZEJlZm9yZTpob3Zlcjo6YmVmb3JlLCAuY2FyZC1oZWFkZXIgLmNhcmQtdGl0bGU6aG92ZXI6OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIHdpZHRoOiAxMDAlO1xuICB0cmFuc2l0aW9uOiAwLjRzO1xufVxuXG4ubXQtNiB7XG4gIG1hcmdpbi10b3A6IDZyZW07XG59XG5cbi5tdC03NSB7XG4gIHBhZGRpbmctdG9wOiA3NXB4O1xufVxuXG4udW5kZXJsaW5lQmVmb3JlIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4udW5kZXJsaW5lQmVmb3JlOjpiZWZvcmUge1xuICBjb250ZW50OiBcIlwiO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGxlZnQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMnB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZXNtb2tlO1xufVxuXG4uZml4ZWQtZnVsbC1oZWlnaHQge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4udGQtbm9uZSB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cblxuLmdyYWRpZW50LWJhY2tncm91bmQge1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCAjMmQzNDM2LCAjMmMzZTUwKTtcbn1cblxuLyogRXh0ZW5kYWJsZSBjbGFzc2VzIGVuZCAqL1xuLyogUmVzcG9uc2l2ZSBNaXhpbnMgKi9cbi8qUmVzcG9uc2l2ZSBNaXhpbnMgRU5EICovXG4ucmV2aWV3LWNvbnRhaW5lciB7XG4gIGhlaWdodDogMjAwcHg7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGJveC1zaGFkb3c6IDVweCAzcHggM3B4IDAgcmdiYSgwLCAwLCAwLCAwLjQpO1xuICB3aWR0aDogMTAwJTtcbiAgYm9yZGVyOiAxcHggc29saWQgIzJjM2U1MDtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAucmV2aWV3LWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICB9XG59XG5cbi5jYXJkLWFzaWRlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RmZTZlOTtcbn1cbi5jYXJkLWFzaWRlIC5pbWctY29udGFpbmVyIC5pbWctZmx1aWQge1xuICB3aWR0aDogMTUwcHg7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7XG4gIC5jYXJkLWFzaWRlIC5pbWctY29udGFpbmVyIC5pbWctZmx1aWQge1xuICAgIHdpZHRoOiAxMDBweDtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXJnaW46IGF1dG87XG4gICAgcGFkZGluZzogNXB4O1xuICAgIGhlaWdodDogNzVweDtcbiAgfVxufVxuLmNhcmQtYXNpZGUgcC50ZXh0LWNlbnRlci5teS1tZC0yLm15LXNtLTAuZm9udC1pdGFsaWMge1xuICBjb2xvcjogcmdiYSgwLCAwLCAwLCAwLjQpO1xufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAuY2FyZC1hc2lkZSBwLnRleHQtY2VudGVyLm15LW1kLTIubXktc20tMC5mb250LWl0YWxpYyB7XG4gICAgbWFyZ2luLWJvdHRvbTogMDtcbiAgfVxufVxuXG4uY2FyZCB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxNjNkZWcsICM0NDRhNTAgMCUsICMyYzNlNTAgODAlKTtcbiAgZmxleDogMTtcbiAgYm9yZGVyOiAwO1xuICBib3JkZXItcmFkaXVzOiAwcHggIWltcG9ydGFudDtcbn1cblxuLmNhcmQtaGVhZGVyOmZpcnN0LWNoaWxkIHtcbiAgYm9yZGVyLXJhZGl1czogMHB4ICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkLWhlYWRlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgYmFja2dyb3VuZDogIzJjM2U1MDtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgLmNhcmQtaGVhZGVyIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxufVxuLmNhcmQtaGVhZGVyIC5jYXJkLXRpdGxlIHtcbiAgZm9udC1zaXplOiAzMHB4O1xuICBtYXJnaW46IDA7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMzI1cHgpIGFuZCAobWF4LXdpZHRoOiA5OTJweCkge1xuICAuY2FyZC1oZWFkZXIgLmNhcmQtdGl0bGUge1xuICAgIGZvbnQtc2l6ZTogMjZweDtcbiAgfVxufVxuXG4uY2FyZC1ib2R5IHtcbiAgY29sb3I6IHdoaXRlc21va2U7XG59XG4uY2FyZC1ib2R5IGJ1dHRvbi5zZWUtbW9yZS1idG4ge1xuICB3aWR0aDogMTAwcHg7XG59XG4uY2FyZC1ib2R5ICN0ZXh0VHJ1bmNhdGUge1xuICB3aWR0aDogNzAwcHg7XG59XG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDMyNXB4KSBhbmQgKG1heC13aWR0aDogOTkycHgpIHtcbiAgLmNhcmQtYm9keSAjdGV4dFRydW5jYXRlIHtcbiAgICB3aWR0aDogMjAwcHg7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpIGFuZCAobWF4LXdpZHRoOiAxMjAwcHgpIHtcbiAgLmNhcmQtYm9keSAjdGV4dFRydW5jYXRlIHtcbiAgICB3aWR0aDogNDAwcHg7XG4gIH1cbn1cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTIwMHB4KSBhbmQgKG1heC13aWR0aDogMTQ0MHB4KSB7XG4gIC5jYXJkLWJvZHkgI3RleHRUcnVuY2F0ZSB7XG4gICAgd2lkdGg6IDQwMHB4O1xuICB9XG59XG5cbmFwcC12b3Rlcy1jb250YWluZXIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGJvdHRvbTogMTUlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG59XG5cbm5nYi1yYXRpbmc6Zm9jdXMge1xuICBvdXRsaW5lOiBub25lO1xufSIsIkBpbXBvcnQgJy4uLy4uLy4uLy4uL2Fzc2V0cy9zY3NzX2V4dGVuZGFibGVzL2luZGV4JztcclxuXHJcbi5yZXZpZXctY29udGFpbmVyIHtcclxuICBoZWlnaHQ6IDIwMHB4O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgQGluY2x1ZGUgc21hbGxQaG9uZU1peGluIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gIH1cclxuICBib3gtc2hhZG93OiA1cHggM3B4IDNweCAwIGdldENvbG9yKGJveC1zaGFkb3ctY29sb3IpO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIGdldENvbG9yKGJsdWVIZWFkZXIpO1xyXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxufVxyXG5cclxuLmNhcmQtYXNpZGUge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNkZmU2ZTk7XHJcbiAgLmltZy1jb250YWluZXIge1xyXG4gICAgLmltZy1mbHVpZCB7XHJcbiAgICAgIHdpZHRoOiAxNTBweDtcclxuICAgICAgcGFkZGluZzogMTBweDtcclxuICAgICAgQGluY2x1ZGUgc21hbGxQaG9uZU1peGluIHtcclxuICAgICAgICB3aWR0aDogMTAwcHg7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgbWFyZ2luOiBhdXRvO1xyXG4gICAgICAgIHBhZGRpbmc6IDVweDtcclxuICAgICAgICBoZWlnaHQ6IDc1cHg7XHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbiAgcC50ZXh0LWNlbnRlci5teS1tZC0yLm15LXNtLTAuZm9udC1pdGFsaWMge1xyXG4gICAgY29sb3I6IHJnYmEoMCwgMCwgMCwgMC40KTtcclxuICAgIEBpbmNsdWRlIHNtYWxsUGhvbmVNaXhpbiB7XHJcbiAgICAgIG1hcmdpbi1ib3R0b206IDA7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG4uY2FyZCB7XHJcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE2M2RlZywgIzQ0NGE1MCAwJSwgIzJjM2U1MCA4MCUpO1xyXG4gIGZsZXg6IDE7XHJcbiAgYm9yZGVyOiAwO1xyXG4gIGJvcmRlci1yYWRpdXM6IDBweCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uY2FyZC1oZWFkZXI6Zmlyc3QtY2hpbGQge1xyXG4gIGJvcmRlci1yYWRpdXM6IDBweCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uY2FyZC1oZWFkZXIge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gIEBpbmNsdWRlIHNtYWxsUGhvbmVNaXhpbiB7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICB9XHJcbiAgLy8gYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE2M2RlZywgIzJkMzQzNiwgIzJjM2U1MCk7XHJcbiAgYmFja2dyb3VuZDogIzJjM2U1MDtcclxuICAuY2FyZC10aXRsZSB7XHJcbiAgICBAaW5jbHVkZSBtZWRpdW1QaG9uZU1peGluIHtcclxuICAgICAgZm9udC1zaXplOiAyNnB4O1xyXG4gICAgfVxyXG4gICAgZm9udC1zaXplOiAzMHB4O1xyXG4gICAgbWFyZ2luOiAwO1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgQGV4dGVuZCAuYW5pbWF0ZWRCZWZvcmU7XHJcbiAgfVxyXG59XHJcblxyXG4uY2FyZC1ib2R5IHtcclxuICBidXR0b24uc2VlLW1vcmUtYnRuIHtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICB9XHJcbiAgY29sb3I6IHdoaXRlc21va2U7XHJcbiAgI3RleHRUcnVuY2F0ZSB7XHJcbiAgICB3aWR0aDogNzAwcHg7XHJcbiAgICBAaW5jbHVkZSBtZWRpdW1QaG9uZU1peGluIHtcclxuICAgICAgd2lkdGg6IDIwMHB4O1xyXG4gICAgfVxyXG4gICAgQGluY2x1ZGUgc21hbGxEZXNrdG9wTWl4aW4ge1xyXG4gICAgICB3aWR0aDogNDAwcHg7XHJcbiAgICB9XHJcbiAgICBAaW5jbHVkZSBsYXJnZURlc2t0b3BNaXhpbiB7XHJcbiAgICAgIHdpZHRoOiA0MDBweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuYXBwLXZvdGVzLWNvbnRhaW5lciB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIGJvdHRvbTogMTUlO1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XHJcbn1cclxubmdiLXJhdGluZzpmb2N1cyB7XHJcbiAgb3V0bGluZTogbm9uZTtcclxufVxyXG4iXX0= */", ".star[_ngcontent-%COMP%] {\n        font-size: 1.5rem;\n        color: #b0c4de;\n      }\n      .filled[_ngcontent-%COMP%] {\n        color: #1e90ff;\n      }\n      .bad[_ngcontent-%COMP%] {\n        color: #deb0b0;\n      }\n      .filled.bad[_ngcontent-%COMP%] {\n        color: #ff1e1e;\n      }"]
     });
     /*@__PURE__*/
@@ -5362,7 +5437,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return [{
           type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbRatingConfig"]
         }, {
-          type: _shared_review_service__WEBPACK_IMPORTED_MODULE_3__["ReviewService"]
+          type: _shared_review_service__WEBPACK_IMPORTED_MODULE_2__["ReviewService"]
         }];
       }, {
         reviewElement: [{
@@ -5399,41 +5474,119 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_app_shared_review_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/app/shared/review.service */
+    "./src/app/shared/review.service.ts");
+    /* harmony import */
+
+
+    var src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/shared/auth.service */
+    "./src/app/shared/auth.service.ts");
+    /* harmony import */
+
+
+    var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ngx-toastr */
+    "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
 
     var ReviewFullComponent = /*#__PURE__*/function () {
-      function ReviewFullComponent() {
+      function ReviewFullComponent(router, reviewService, auth, toastr) {
         _classCallCheck(this, ReviewFullComponent);
+
+        this.router = router;
+        this.reviewService = reviewService;
+        this.auth = auth;
+        this.toastr = toastr;
+        this.currentReviewId = '';
+        this.currentReviewId = this.router.url.slice(9);
       }
 
       _createClass(ReviewFullComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          var _this20 = this;
+
+          this.auth.showHTTPLoader(true);
+          this.reviewService.getReviewById(this.currentReviewId).subscribe(function (res) {
+            _this20.auth.showHTTPLoader(false);
+
+            _this20.activeReview = res.payload.data();
+          }, function (errorRes) {
+            _this20.auth.showHTTPLoader(false);
+
+            _this20.toastr.error(errorRes.message);
+          });
+        }
       }]);
 
       return ReviewFullComponent;
     }();
 
     ReviewFullComponent.ɵfac = function ReviewFullComponent_Factory(t) {
-      return new (t || ReviewFullComponent)();
+      return new (t || ReviewFullComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_review_service__WEBPACK_IMPORTED_MODULE_2__["ReviewService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]));
     };
 
     ReviewFullComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: ReviewFullComponent,
       selectors: [["app-review-full"]],
-      decls: 3,
-      vars: 0,
-      consts: [[1, "mt-75", "gradient-background"]],
+      decls: 8,
+      vars: 5,
+      consts: [[1, "mt-75", "gradient-background"], [3, "src", "alt"]],
       template: function ReviewFullComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "img", 1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "HELLO THIS IS FULL REVIEW PAGE THANKS");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "p");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("src", ctx.activeReview == null ? null : ctx.activeReview.imagePath, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("alt", ctx.activeReview == null ? null : ctx.activeReview.companyName);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.activeReview == null ? null : ctx.activeReview.companyName);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.activeReview == null ? null : ctx.activeReview.textExcerpt);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.activeReview == null ? null : ctx.activeReview.rating);
         }
       },
       styles: [".flex-column-center[_ngcontent-%COMP%], section[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.animatedBefore[_ngcontent-%COMP%] {\n  position: relative;\n  color: whitesmoke;\n  padding: 5px;\n}\n.animatedBefore[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: whitesmoke;\n  transition: 0.4s;\n}\n.animatedBefore[_ngcontent-%COMP%]:hover::before {\n  content: \"\";\n  width: 100%;\n  transition: 0.4s;\n}\n.mt-6[_ngcontent-%COMP%] {\n  margin-top: 6rem;\n}\n.mt-75[_ngcontent-%COMP%] {\n  padding-top: 75px;\n}\n.underlineBefore[_ngcontent-%COMP%] {\n  position: relative;\n}\n.underlineBefore[_ngcontent-%COMP%]::before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 2px;\n  background-color: whitesmoke;\n}\n.fixed-full-height[_ngcontent-%COMP%] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 100%;\n}\n.td-none[_ngcontent-%COMP%] {\n  text-decoration: none;\n}\n.gradient-background[_ngcontent-%COMP%] {\n  background: linear-gradient(180deg, #2d3436, #2c3e50);\n}\n\n\n\nsection[_ngcontent-%COMP%] {\n  min-height: 100vh;\n}\nsection[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: whitesmoke;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yZXZpZXdzL3Jldmlldy1mdWxsL0Q6XFxXb3JrU3BhY2VcXFNlYXZ1c1xcc3VibWFyaW5lLXRlYW0uZ2l0aHViLmlvL3NyY1xcYXNzZXRzXFxzY3NzX2V4dGVuZGFibGVzXFxfaW5kZXguc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9yZXZpZXdzL3Jldmlldy1mdWxsL3Jldmlldy1mdWxsLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3Jldmlld3MvcmV2aWV3LWZ1bGwvRDpcXFdvcmtTcGFjZVxcU2VhdnVzXFxzdWJtYXJpbmUtdGVhbS5naXRodWIuaW8vc3JjXFxhcHBcXGNvbXBvbmVudHNcXHJldmlld3NcXHJldmlldy1mdWxsXFxyZXZpZXctZnVsbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFzQkEsdUJBQUE7QUFDQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxXQUFBO0VBQ0EsU0FBQTtFQUNBLE9BQUE7RUFDQSw0QkFBQTtFQUNBLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsV0FBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLGdCQUFBO0FDckJGO0FEd0JBO0VBQ0UsaUJBQUE7QUNyQkY7QUR3QkE7RUFDRSxrQkFBQTtBQ3JCRjtBRHdCQTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLE9BQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSw0QkFBQTtBQ3JCRjtBRHVCQTtFQUNFLGVBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0EsWUFBQTtBQ3BCRjtBRHVCQTtFQUNFLHFCQUFBO0FDcEJGO0FEdUJBO0VBQ0UscURBQUE7QUNwQkY7QUR1QkEsMkJBQUE7QUFFQSxzQkFBQTtBQXFDQSx5QkFBQTtBRWhJQTtFQUNFLGlCQUFBO0FEd0VGO0FDdEVFO0VBQ0UsaUJBQUE7QUR3RUoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Jldmlld3MvcmV2aWV3LWZ1bGwvcmV2aWV3LWZ1bGwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIkY29sb3JzOiAoXHJcbiAgXCJib3gtc2hhZG93LWNvbG9yXCI6IHJnYmEoMCwgMCwgMCwgMC40KSxcclxuICBcInBlYWNoQ29sb3JcIjogcmdiYSgyMTIsIDExMywgMTEzLCAxKSxcclxuICBcImdyZXlEYXJrXCI6IHJnYmEoMCwgMCwgMCwgMC43KSxcclxuICBcImJsdWVIZWFkZXJcIjogIzJjM2U1MCxcclxuICBcIndoaXRlR3JleVwiOiB3aGl0ZXNtb2tlLFxyXG4pO1xyXG5cclxuJGZvbnRTaXplczogKFxyXG4gIFwiaDFcIjogNzJweCxcclxuICBcImgyXCI6IDM2cHgsXHJcbiAgXCJoM1wiOiAyNHB4LFxyXG4pO1xyXG5cclxuQGZ1bmN0aW9uIGdldENvbG9yKCRjb2xvck5hbWUpIHtcclxuICBAcmV0dXJuIG1hcC1nZXQoJGNvbG9ycywgJGNvbG9yTmFtZSk7XHJcbn1cclxuXHJcbkBmdW5jdGlvbiBnZXRGb250U2l6ZSgkZm9udCkge1xyXG4gIEByZXR1cm4gbWFwLWdldCgkZm9udFNpemVzLCAkZm9udCk7XHJcbn1cclxuXHJcbi8qIEV4dGVuZGFibGUgY2xhc3NlcyAqL1xyXG4uZmxleC1jb2x1bW4tY2VudGVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuLmFuaW1hdGVkQmVmb3JlIHtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgY29sb3I6IHdoaXRlc21va2U7XHJcbiAgcGFkZGluZzogNXB4O1xyXG59XHJcblxyXG4uYW5pbWF0ZWRCZWZvcmU6OmJlZm9yZSB7XHJcbiAgY29udGVudDogXCJcIjtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgd2lkdGg6IDA7XHJcbiAgaGVpZ2h0OiAycHg7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGVzbW9rZTtcclxuICB0cmFuc2l0aW9uOiAwLjRzO1xyXG59XHJcblxyXG4uYW5pbWF0ZWRCZWZvcmU6aG92ZXI6OmJlZm9yZSB7XHJcbiAgY29udGVudDogXCJcIjtcclxuICB3aWR0aDogMTAwJTtcclxuICB0cmFuc2l0aW9uOiAwLjRzO1xyXG59XHJcblxyXG4ubXQtNiB7XHJcbiAgbWFyZ2luLXRvcDogNnJlbTtcclxufVxyXG5cclxuLm10LTc1IHtcclxuICBwYWRkaW5nLXRvcDogNzVweDtcclxufVxyXG5cclxuLnVuZGVybGluZUJlZm9yZSB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4udW5kZXJsaW5lQmVmb3JlOjpiZWZvcmUge1xyXG4gIGNvbnRlbnQ6IFwiXCI7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGxlZnQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMnB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XHJcbn1cclxuLmZpeGVkLWZ1bGwtaGVpZ2h0IHtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGhlaWdodDogMTAwJTtcclxufVxyXG5cclxuLnRkLW5vbmUge1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxufVxyXG5cclxuLmdyYWRpZW50LWJhY2tncm91bmQge1xyXG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxODBkZWcsICMyZDM0MzYsICMyYzNlNTApO1xyXG59XHJcblxyXG4vKiBFeHRlbmRhYmxlIGNsYXNzZXMgZW5kICovXHJcblxyXG4vKiBSZXNwb25zaXZlIE1peGlucyAqL1xyXG5cclxuQG1peGluIHNtYWxsUGhvbmVNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBtZWRpdW1QaG9uZU1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDMyNXB4KSBhbmQgKG1heC13aWR0aDogOTkycHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gbGFyZ2VQaG9uZU1peGluIHtcclxuICBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDYwMHB4KSBhbmQgKG1heC13aWR0aDogNzY4cHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gdGFibGV0TWl4aW4ge1xyXG4gIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNzY4cHgpIGFuZCAobWF4LXdpZHRoOiA5OTJweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBzbWFsbERlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA5OTJweCkgYW5kIChtYXgtd2lkdGg6IDEyMDBweCkge1xyXG4gICAgQGNvbnRlbnQ7XHJcbiAgfVxyXG59XHJcbkBtaXhpbiBsYXJnZURlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMjAwcHgpIGFuZCAobWF4LXdpZHRoOiAxNDQwcHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG5AbWl4aW4gRXh0cmFMYXJnZURlc2t0b3BNaXhpbiB7XHJcbiAgQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxNDQwcHgpIHtcclxuICAgIEBjb250ZW50O1xyXG4gIH1cclxufVxyXG4vKlJlc3BvbnNpdmUgTWl4aW5zIEVORCAqL1xyXG4iLCIvKiBFeHRlbmRhYmxlIGNsYXNzZXMgKi9cbi5mbGV4LWNvbHVtbi1jZW50ZXIsIHNlY3Rpb24ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmFuaW1hdGVkQmVmb3JlIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBjb2xvcjogd2hpdGVzbW9rZTtcbiAgcGFkZGluZzogNXB4O1xufVxuXG4uYW5pbWF0ZWRCZWZvcmU6OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgd2lkdGg6IDA7XG4gIGhlaWdodDogMnB4O1xuICBib3R0b206IDA7XG4gIGxlZnQ6IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG4gIHRyYW5zaXRpb246IDAuNHM7XG59XG5cbi5hbmltYXRlZEJlZm9yZTpob3Zlcjo6YmVmb3JlIHtcbiAgY29udGVudDogXCJcIjtcbiAgd2lkdGg6IDEwMCU7XG4gIHRyYW5zaXRpb246IDAuNHM7XG59XG5cbi5tdC02IHtcbiAgbWFyZ2luLXRvcDogNnJlbTtcbn1cblxuLm10LTc1IHtcbiAgcGFkZGluZy10b3A6IDc1cHg7XG59XG5cbi51bmRlcmxpbmVCZWZvcmUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi51bmRlcmxpbmVCZWZvcmU6OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbGVmdDogMDtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAycHg7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlc21va2U7XG59XG5cbi5maXhlZC1mdWxsLWhlaWdodCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi50ZC1ub25lIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuXG4uZ3JhZGllbnQtYmFja2dyb3VuZCB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxODBkZWcsICMyZDM0MzYsICMyYzNlNTApO1xufVxuXG4vKiBFeHRlbmRhYmxlIGNsYXNzZXMgZW5kICovXG4vKiBSZXNwb25zaXZlIE1peGlucyAqL1xuLypSZXNwb25zaXZlIE1peGlucyBFTkQgKi9cbnNlY3Rpb24ge1xuICBtaW4taGVpZ2h0OiAxMDB2aDtcbn1cbnNlY3Rpb24gcCB7XG4gIGNvbG9yOiB3aGl0ZXNtb2tlO1xufSIsIkBpbXBvcnQgJy4uLy4uLy4uLy4uL2Fzc2V0cy9zY3NzX2V4dGVuZGFibGVzL2luZGV4JztcclxuXHJcbnNlY3Rpb24ge1xyXG4gIG1pbi1oZWlnaHQ6IDEwMHZoO1xyXG4gIEBleHRlbmQgLmZsZXgtY29sdW1uLWNlbnRlcjtcclxuICBwIHtcclxuICAgIGNvbG9yOiBnZXRDb2xvcih3aGl0ZUdyZXkpO1xyXG4gIH1cclxufVxyXG4iXX0= */"]
@@ -5449,7 +5602,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           styleUrls: ['./review-full.component.scss']
         }]
       }], function () {
-        return [];
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+        }, {
+          type: src_app_shared_review_service__WEBPACK_IMPORTED_MODULE_2__["ReviewService"]
+        }, {
+          type: src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+        }, {
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]
+        }];
       }, null);
     })();
     /***/
@@ -5516,78 +5677,78 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "renderUpvotes",
         value: function renderUpvotes() {
-          var _this19 = this;
+          var _this21 = this;
 
           this.rs.getUpvotes(this.id).subscribe(function (e) {
-            _this19.upvoteList = e.map(function (item) {
+            _this21.upvoteList = e.map(function (item) {
               return item.payload.doc.data();
             });
 
-            _this19.as.afAuth.user.subscribe(function (user) {
-              _this19.loggedUser = user === null || user === void 0 ? void 0 : user.email;
+            _this21.as.afAuth.user.subscribe(function (user) {
+              _this21.loggedUser = user === null || user === void 0 ? void 0 : user.email;
 
-              _this19.controlButton(_this19.loggedUser);
+              _this21.controlButton(_this21.loggedUser);
             });
           });
         }
       }, {
         key: "renderDownvotes",
         value: function renderDownvotes() {
-          var _this20 = this;
+          var _this22 = this;
 
           this.rs.getDownvotes(this.id).subscribe(function (e) {
-            _this20.downvoteList = e.map(function (item) {
+            _this22.downvoteList = e.map(function (item) {
               return item.payload.doc.data();
             });
 
-            _this20.as.afAuth.user.subscribe(function (user) {
-              _this20.loggedUser = user === null || user === void 0 ? void 0 : user.email;
+            _this22.as.afAuth.user.subscribe(function (user) {
+              _this22.loggedUser = user === null || user === void 0 ? void 0 : user.email;
 
-              _this20.controlButton(_this20.loggedUser);
+              _this22.controlButton(_this22.loggedUser);
             });
           });
         }
       }, {
         key: "upvoteBtn",
         value: function upvoteBtn() {
-          var _this21 = this;
+          var _this23 = this;
 
           this.as.getUsername().subscribe(function (e) {
-            _this21.rs.upvoteReview(_this21.id, 1, e.email);
+            _this23.rs.upvoteReview(_this23.id, 1, e.email);
 
-            _this21.renderUpvotes();
+            _this23.renderUpvotes();
 
-            _this21.controlButton(_this21.loggedUser);
+            _this23.controlButton(_this23.loggedUser);
           });
         }
       }, {
         key: "downvoteBtn",
         value: function downvoteBtn() {
-          var _this22 = this;
+          var _this24 = this;
 
           this.as.getUsername().subscribe(function (e) {
-            _this22.rs.upvoteReview(_this22.id, -1, e.email);
+            _this24.rs.upvoteReview(_this24.id, -1, e.email);
 
-            _this22.renderDownvotes();
+            _this24.renderDownvotes();
 
-            _this22.controlButton(_this22.loggedUser);
+            _this24.controlButton(_this24.loggedUser);
           });
         }
       }, {
         key: "controlButton",
         value: function controlButton(mail) {
-          var _this23 = this;
+          var _this25 = this;
 
           this.upvoteList.forEach(function (item) {
             if (item.username === mail) {
-              _this23.upvoteBlocked = true;
-              _this23.downvoteBlocked = true;
+              _this25.upvoteBlocked = true;
+              _this25.downvoteBlocked = true;
             }
           });
           this.downvoteList.forEach(function (item) {
             if (item.username === mail) {
-              _this23.upvoteBlocked = true;
-              _this23.downvoteBlocked = true;
+              _this25.upvoteBlocked = true;
+              _this25.downvoteBlocked = true;
             }
           });
         }
@@ -6520,14 +6681,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AuthGuardGuard, [{
         key: "canActivate",
         value: function canActivate(next, state) {
-          var _this24 = this;
+          var _this26 = this;
 
           return new Promise(function (resolve, reject) {
-            _this24.af.onAuthStateChanged(function (user) {
+            _this26.af.onAuthStateChanged(function (user) {
               if (user) {
                 resolve(true);
               } else {
-                _this24.router.navigate(['/']);
+                _this26.router.navigate(['/']);
 
                 resolve(false);
               }
@@ -6687,7 +6848,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "signOut",
         value: function signOut() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this25 = this;
+            var _this27 = this;
 
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
@@ -6699,7 +6860,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 2:
                     this.router.navigate(['/']);
                     this.translateService.get('TOASTR').subscribe(function (response) {
-                      _this25.toastr.success(response.SIGNED_OUT, response.SUCCESS_TITLE);
+                      _this27.toastr.success(response.SIGNED_OUT, response.SUCCESS_TITLE);
                     });
 
                   case 4:
@@ -6714,7 +6875,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "signUp",
         value: function signUp(email, password) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-            var _this26 = this;
+            var _this28 = this;
 
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
@@ -6726,7 +6887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 2:
                     this.sendConfirmationEmail();
                     this.translateService.get('TOASTR').subscribe(function (response) {
-                      _this26.toastr.success(response.USER_CREATED, response.SUCCESS_TITLE);
+                      _this28.toastr.success(response.USER_CREATED, response.SUCCESS_TITLE);
                     });
 
                   case 4:
@@ -6764,19 +6925,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "resetPassword",
         value: function resetPassword(email) {
-          var _this27 = this;
+          var _this29 = this;
 
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.afAuth.sendPasswordResetEmail(email).then(function () {
-            _this27.showHTTPLoader(false);
+            _this29.showHTTPLoader(false);
 
-            _this27.translateService.get('TOASTR').subscribe(function (response) {
-              _this27.toastr.success(response.PASS_RESET, response.SUCCESS_TITLE);
+            _this29.translateService.get('TOASTR').subscribe(function (response) {
+              _this29.toastr.success(response.PASS_RESET, response.SUCCESS_TITLE);
             });
           })["catch"](function (err) {
-            _this27.showHTTPLoader(false);
+            _this29.showHTTPLoader(false);
 
-            _this27.translateService.get('TOASTR').subscribe(function (response) {
-              _this27.toastr.success(err.message, response.ERROR_TITLE);
+            _this29.translateService.get('TOASTR').subscribe(function (response) {
+              _this29.toastr.success(err.message, response.ERROR_TITLE);
             });
           }));
         } // Get the User
@@ -6874,6 +7035,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getCompanies",
         value: function getCompanies() {
           return this.firestore.collection('companies').snapshotChanges();
+        }
+      }, {
+        key: "getCompanyByName",
+        value: function getCompanyByName(name) {
+          return this.firestore.collection('companies', function (ref) {
+            return ref.where('name', '==', name);
+          }).snapshotChanges();
         }
       }]);
 
@@ -6978,13 +7146,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getNumberOfReviews",
         value: function getNumberOfReviews() {
-          var _this28 = this;
+          var _this30 = this;
 
           this.reviewService.getReviewsForCompany(this.ComponentListItem.name).subscribe(function (item) {
             item.map(function (rev) {
-              _this28.reviews.push(rev.payload.doc.data());
+              _this30.reviews.push(rev.payload.doc.data());
             });
-            _this28.numberOfReviews = _this28.reviews.length;
+            _this30.numberOfReviews = _this30.reviews.length;
           });
         }
       }]);
@@ -7332,13 +7500,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! moment */
+    "./node_modules/moment/moment.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+    /* harmony import */
+
+
+    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/fire/firestore */
     "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
     /* harmony import */
 
 
-    var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ngx-toastr */
     "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
 
@@ -7360,7 +7538,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getReviewById",
         value: function getReviewById(id) {
-          return this.firestore.collection('reviews').doc(id).get();
+          return this.firestore.collection('reviews').doc(id).snapshotChanges();
         }
       }, {
         key: "getReviewsForCompany",
@@ -7380,13 +7558,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "upvoteReview",
         value: function upvoteReview(reviewId, value, user) {
-          var _this29 = this;
+          var _this31 = this;
 
           this.firestore.collection("reviews/".concat(reviewId, "/upvotes")).add({
             username: user,
             upvote: value
           })["catch"](function (error) {
-            _this29.ts.error(error.message, 'Error:');
+            _this31.ts.error(error.message, 'Error:');
           });
         }
       }, {
@@ -7413,13 +7591,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function resolvePayload(e) {
           return e[0].payload.doc.data();
         }
+      }, {
+        key: "formatDate",
+        value: function formatDate(element) {
+          element = element.data.timeStamp.toDate();
+          return moment__WEBPACK_IMPORTED_MODULE_1__(element).format('DD. MM. YYYY');
+        }
       }]);
 
       return ReviewService;
     }();
 
     ReviewService.ɵfac = function ReviewService_Factory(t) {
-      return new (t || ReviewService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"]));
+      return new (t || ReviewService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]));
     };
 
     ReviewService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -7437,9 +7621,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"]
+          type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
         }, {
-          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"]
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"]
         }];
       }, null);
     })();
