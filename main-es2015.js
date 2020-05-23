@@ -4238,6 +4238,9 @@ class ThemeService {
         return this.active;
     }
     getLocalStorageTheme() {
+        if (!localStorage.getItem('activeTheme')) {
+            return _theme__WEBPACK_IMPORTED_MODULE_1__["light"];
+        }
         if (localStorage.getItem('activeTheme') === 'dark') {
             return _theme__WEBPACK_IMPORTED_MODULE_1__["dark"];
         }

@@ -7910,6 +7910,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getLocalStorageTheme",
         value: function getLocalStorageTheme() {
+          if (!localStorage.getItem('activeTheme')) {
+            return _theme__WEBPACK_IMPORTED_MODULE_1__["light"];
+          }
+
           if (localStorage.getItem('activeTheme') === 'dark') {
             return _theme__WEBPACK_IMPORTED_MODULE_1__["dark"];
           } else if (localStorage.getItem('activeTheme') === 'light') {
