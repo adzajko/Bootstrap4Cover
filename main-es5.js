@@ -2012,21 +2012,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ngOnInit() {
           var _this3 = this;
 
-          var complist = [];
           this.auth.showHTTPLoader(true);
           this.companyService.getCompanies().subscribe(function (item) {
             _this3.auth.showHTTPLoader(false);
 
-            item.map(function (e) {
-              _this3.companyId = e.payload.doc.id;
-              complist.push(e.payload.doc.data());
+            item.forEach(function (element) {
+              _this3.companyList.push(element.payload.doc.data());
+            });
+            _this3.companyList = _this3.companyList.filter(function (v, i, a) {
+              return a.findIndex(function (t) {
+                return t.name === v.name;
+              }) === i;
             });
           }, function (errorRes) {
             _this3.translate.get('TOASTR').subscribe(function (res) {
               _this3.toastr.error(errorRes.message, res.ERROR_TITLE);
             });
           });
-          this.companyList = complist;
         }
       }]);
 

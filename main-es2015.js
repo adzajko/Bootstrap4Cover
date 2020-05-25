@@ -1176,20 +1176,18 @@ class CompaniesComponent {
         this.companyList = [];
     }
     ngOnInit() {
-        const complist = [];
         this.auth.showHTTPLoader(true);
         this.companyService.getCompanies().subscribe(item => {
             this.auth.showHTTPLoader(false);
-            item.map(e => {
-                this.companyId = e.payload.doc.id;
-                complist.push(e.payload.doc.data());
+            item.forEach(element => {
+                this.companyList.push(element.payload.doc.data());
             });
+            this.companyList = this.companyList.filter((v, i, a) => a.findIndex(t => t.name === v.name) === i);
         }, errorRes => {
             this.translate.get('TOASTR').subscribe(res => {
                 this.toastr.error(errorRes.message, res.ERROR_TITLE);
             });
         });
-        this.companyList = complist;
     }
 }
 CompaniesComponent.ɵfac = function CompaniesComponent_Factory(t) { return new (t || CompaniesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_company_service__WEBPACK_IMPORTED_MODULE_1__["CompanyService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"])); };
