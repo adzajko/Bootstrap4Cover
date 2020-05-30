@@ -2353,6 +2353,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.currentCompanyName = '';
         this.reviews = [];
         this.canLoadReviews = false;
+        this.disableLoadReviewsButton = false;
         this.currentCompanyName = router.url.slice(11);
       }
 
@@ -2388,6 +2389,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.auth.showHTTPLoader(true);
           this.reviewService.getReviewsForCompany(this.currentCompanyName).subscribe(function (res) {
             _this6.canLoadReviews = true;
+            _this6.disableLoadReviewsButton = true;
 
             _this6.auth.showHTTPLoader(false);
 
@@ -2423,8 +2425,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       type: CompanyFullPageComponent,
       selectors: [["app-company-full-page"]],
       decls: 37,
-      vars: 25,
-      consts: [[1, "gradient-background", "mt-75"], [1, "main-container", "container", "mt-5"], [1, "main-body", "container"], [1, "company-header"], [1, "company-info", "my-5", "d-flex", "justify-content-between"], [1, "fa", "fa-briefcase", "mr-2"], [1, "fa", "fa-map-marker", "mr-2"], [1, "company-body"], ["mat-raised-button", "", 1, "d-block", "mx-auto", "w-50", "mt-5", 3, "click"], [1, "main-aside", "container"], [1, "img-container"], [1, "img-fluid", 3, "src", "alt"], [1, "fa", "fa-star", "mr-2"], [1, "fa", "fa-users", "mr-2"], ["href", "#", 1, "btn", "btn-danger", "d-block", "mx-auto"], [1, "fa", "fa-link", "mr-2"], ["class", "reviews-container container", 4, "ngIf"], [1, "reviews-container", "container"], ["class", "review-element", 4, "ngFor", "ngForOf"], [1, "review-element"], [1, "text-center"], ["mat-raised-button", "", "color", "warn", 1, "d-block", "mx-auto", "w-sm-100", "w-lg-25", 3, "routerLink"]],
+      vars: 26,
+      consts: [[1, "gradient-background", "mt-75"], [1, "main-container", "container", "mt-5"], [1, "main-body", "container"], [1, "company-header"], [1, "company-info", "my-5", "d-flex", "justify-content-between"], [1, "fa", "fa-briefcase", "mr-2"], [1, "fa", "fa-map-marker", "mr-2"], [1, "company-body"], ["mat-raised-button", "", 1, "d-block", "mx-auto", "w-50", "mt-5", 3, "disabled", "click"], [1, "main-aside", "container"], [1, "img-container"], [1, "img-fluid", 3, "src", "alt"], [1, "fa", "fa-star", "mr-2"], [1, "fa", "fa-users", "mr-2"], ["href", "#", 1, "btn", "btn-danger", "d-block", "mx-auto"], [1, "fa", "fa-link", "mr-2"], ["class", "reviews-container container", 4, "ngIf"], [1, "reviews-container", "container"], ["class", "review-element", 4, "ngFor", "ngForOf"], [1, "review-element"], [1, "text-center"], ["mat-raised-button", "", "color", "warn", 1, "d-block", "mx-auto", "w-sm-100", "w-lg-25", 3, "routerLink"]],
       template: function CompanyFullPageComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
@@ -2545,15 +2547,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](10, 13, "COMPANY_FULL.INDUSTRY"), ": ", ctx.currentCompany == null ? null : ctx.currentCompany.technology, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](10, 14, "COMPANY_FULL.INDUSTRY"), ": ", ctx.currentCompany == null ? null : ctx.currentCompany.technology, " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](14, 15, "COMPANY_FULL.LOCATION"), ": ", ctx.currentCompany == null ? null : ctx.currentCompany.location, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](14, 16, "COMPANY_FULL.LOCATION"), ": ", ctx.currentCompany == null ? null : ctx.currentCompany.location, " ");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](20, 17, "COMPANY_FULL.SEE_REVIEWS"), " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx.disableLoadReviewsButton);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](20, 18, "COMPANY_FULL.SEE_REVIEWS"), " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
@@ -2563,15 +2569,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](27, 19, "COMPANY_FULL.AVRG"), " : ", ctx.currentCompany == null ? null : ctx.currentCompany.averageReview, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](27, 20, "COMPANY_FULL.AVRG"), " : ", ctx.currentCompany == null ? null : ctx.currentCompany.averageReview, " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](31, 21, "COMPANY_FULL.EMPLOYEES"), ": 50 ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](31, 22, "COMPANY_FULL.EMPLOYEES"), ": 50 ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](35, 23, "COMPANY_FULL.WEBSITE"), "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](35, 24, "COMPANY_FULL.WEBSITE"), "");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
