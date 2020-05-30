@@ -466,7 +466,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       providers: [_shared_auth_guard_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuardGuard"]],
       imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-        scrollPositionRestoration: 'disabled'
+        scrollPositionRestoration: 'top'
       })], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     });
 
@@ -484,7 +484,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
           imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-            scrollPositionRestoration: 'disabled'
+            scrollPositionRestoration: 'top'
           })],
           exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]],
           providers: [_shared_auth_guard_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuardGuard"]]
@@ -609,7 +609,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (rf & 1) {
         var _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 6);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AppComponent_div_6_Template_div_click_0_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21);
@@ -619,7 +619,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return ctx_r20.scrollToTop();
         });
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 7);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
@@ -641,7 +641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function AppComponent_app_login_10_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-login", 8);
       }
 
       if (rf & 2) {
@@ -725,6 +725,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           document.body.scrollTop = 0;
         }
       }, {
+        key: "onActivate",
+        value: function onActivate(event) {
+          this.scrollToTop();
+        }
+      }, {
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
           this.subscription.unsubscribe();
@@ -744,7 +749,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-root"]],
       decls: 12,
       vars: 5,
-      consts: [["main", ""], ["outlet", "outlet"], ["id", "back-to-top", 3, "click", 4, "ngIf"], [4, "ngIf"], [3, "isLoggedIn", 4, "ngIf"], ["id", "back-to-top", 3, "click"], ["aria-hidden", "true", 1, "fa", "fa-chevron-circle-up"], [3, "isLoggedIn"]],
+      consts: [["main", ""], [3, "activate"], ["outlet", "outlet"], ["id", "back-to-top", 3, "click", 4, "ngIf"], [4, "ngIf"], [3, "isLoggedIn", 4, "ngIf"], ["id", "back-to-top", 3, "click"], ["aria-hidden", "true", 1, "fa", "fa-chevron-circle-up"], [3, "isLoggedIn"]],
       template: function AppComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "header");
@@ -755,11 +760,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "main", null, 0);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "router-outlet", null, 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "router-outlet", 1, 2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("activate", function AppComponent_Template_router_outlet_activate_4_listener($event) {
+            return ctx.onActivate($event);
+          });
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, AppComponent_div_6_Template, 2, 1, "div", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, AppComponent_div_6_Template, 2, 1, "div", 3);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "footer");
 
@@ -767,11 +778,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, AppComponent_app_landing_page_9_Template, 1, 1, "app-landing-page", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, AppComponent_app_landing_page_9_Template, 1, 1, "app-landing-page", 4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, AppComponent_app_login_10_Template, 1, 2, "app-login", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, AppComponent_app_login_10_Template, 1, 2, "app-login", 5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, AppComponent_app_http_loader_11_Template, 1, 0, "app-http-loader", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, AppComponent_app_http_loader_11_Template, 1, 0, "app-http-loader", 4);
         }
 
         if (rf & 2) {
@@ -6716,7 +6727,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return new (t || CompanyRoutingModule)();
       },
       imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-        scrollPositionRestoration: 'disabled'
+        scrollPositionRestoration: 'top'
       })], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     });
 
@@ -6734,7 +6745,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
           imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-            scrollPositionRestoration: 'disabled'
+            scrollPositionRestoration: 'top'
           })],
           exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         }]
@@ -7117,7 +7128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return new (t || ReviewRoutingModule)();
       },
       imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-        scrollPositionRestoration: 'disabled'
+        scrollPositionRestoration: 'top'
       })], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
     });
 
@@ -7135,7 +7146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
           imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes, {
-            scrollPositionRestoration: 'disabled'
+            scrollPositionRestoration: 'top'
           })],
           exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
         }]
