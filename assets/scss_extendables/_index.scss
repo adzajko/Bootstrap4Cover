@@ -1,11 +1,24 @@
-$fontSizes: (
-  'h1': 72px,
-  'h2': 36px,
-  'h3': 24px
-);
+/* Extendable classes */
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-background {
+  background-image: url('/assets/images/main-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  @media only screen and (min-width: 1920px) {
+    background-size: 100vw;
+  }
+}
+/* Extendable classes END*/
 
 /* Responsive Mixins */
-
 @mixin smallPhoneMixin {
   @media only screen and (max-width: 600px) {
     @content;
@@ -41,95 +54,4 @@ $fontSizes: (
     @content;
   }
 }
-/*Responsive Mixins END */
-
-@function getFontSize($font) {
-  @return map-get($fontSizes, $font);
-}
-
-/* Extendable classes */
-.flex-column-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.animatedBefore {
-  position: relative;
-  color: var(--font-color);
-  padding: 5px;
-}
-
-.animatedBefore::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--font-color);
-  transition: 0.4s;
-}
-
-.animatedBefore:hover::before {
-  content: '';
-  width: 100%;
-  transition: 0.4s;
-}
-
-.mt-6 {
-  margin-top: 6rem;
-}
-
-.mt-75 {
-  padding-top: 75px;
-}
-
-.underlineBefore {
-  position: relative;
-  text-align: left;
-}
-
-.underlineBefore::before {
-  content: '';
-  position: absolute;
-  left: -60%;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--font-color);
-  @include mediumPhoneMixin {
-    left: -17%;
-  }
-}
-.fixed-full-height {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-}
-
-.td-none {
-  text-decoration: none;
-}
-
-.gradient-background {
-  background: linear-gradient(180deg, var(--secondary), var(--primary));
-}
-
-.wavey-background {
-  background-image: url('/assets/Waves.png');
-  background-size: 1920px;
-  background-repeat: no-repeat;
-  background-position-y: -10rem;
-  background-attachment: fixed;
-  background-color: var(--primary);
-  @media only screen and (min-width: 1920px) {
-    background-size: 100vw;
-  }
-}
-
-/* Extendable classes end */
+/* Responsive Mixins END*/
